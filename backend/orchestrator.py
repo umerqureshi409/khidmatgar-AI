@@ -16,12 +16,19 @@ from agents.yakeen_agent import run_yakeen_followup
 from agents.hifazat_agent import run_hifazat_guard
 
 # Firebase — optional, graceful if unavailable
+# Firebase — optional, graceful if unavailable
 try:
     import firebase_admin
     from firebase_admin import credentials, firestore
-    _cred_path = os.path.join(os.path.dirname(__file__), "firebase_credentials.json")
-    if os.path.exists(_cred_path) and not firebase_admin._apps:
-        _cred = credentials.Certificate(_cred_path)
+    import json
+
+    if not firebase_admin._apps:
+        _cred_json = os.getenv("FIREBASE_CREDENTIALS")
+        if _cred_json:
+            _cred = credentials.Certificate(json.loads(_cred_json))
+        else:
+            _cred_path = os.path.join(os.path.dirname(__file__), "firebase_credentials.json")
+            _cred = credentials.Certificate(_cred_path)
         firebase_admin.initialize_app(_cred)
     _db = firestore.client() if firebase_admin._apps else None
 except Exception:
