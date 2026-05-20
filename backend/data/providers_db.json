@@ -1,0 +1,2677 @@
+{
+  "providers": [
+    {
+      "provider_id": "PRV-ISB-001",
+      "name": "Muhammad Ali",
+      "business_name": "Ali AC & Cooling Services",
+      "phone": "+92-300-1234567",
+      "service_categories": [
+        "AC_TECHNICIAN",
+        "APPLIANCE_REPAIR"
+      ],
+      "areas_served": [
+        "G-11",
+        "G-12",
+        "G-13",
+        "I-8",
+        "I-9",
+        "I-10"
+      ],
+      "city": "Islamabad",
+      "coordinates": {
+        "lat": 33.6844,
+        "lng": 73.0479
+      },
+      "rating": 4.8,
+      "review_count": 127,
+      "response_rate": 0.94,
+      "active_bookings": 2,
+      "verification": {
+        "level": "KHIDMATGAR_VERIFIED",
+        "cnic_verified": true,
+        "background_checked": true
+      },
+      "pricing": {
+        "visit_fee_pkr": 500,
+        "hourly_rate_pkr": 1500,
+        "emergency_surcharge": 0.5,
+        "estimated_total_pkr": 2000
+      },
+      "availability": {
+        "accepts_emergency": true,
+        "emergency_hours": "24/7",
+        "available_today": true,
+        "next_slot": "Today 2PM"
+      },
+      "is_active": true,
+      "experience_years": 8,
+      "tags": [
+        "AC_TECHNICIAN",
+        "INVERTER_AC",
+        "EXPERT",
+        "FAST_RESPONSE"
+      ]
+    },
+    {
+      "provider_id": "PRV-ISB-002",
+      "name": "Bilal Rehman",
+      "business_name": "FastFix AC Pro",
+      "phone": "+92-321-7654321",
+      "service_categories": [
+        "AC_TECHNICIAN"
+      ],
+      "areas_served": [
+        "F-7",
+        "F-8",
+        "F-6",
+        "E-7",
+        "G-6",
+        "G-7"
+      ],
+      "city": "Islamabad",
+      "coordinates": {
+        "lat": 33.7295,
+        "lng": 73.0931
+      },
+      "rating": 4.5,
+      "review_count": 89,
+      "response_rate": 0.87,
+      "active_bookings": 1,
+      "verification": {
+        "level": "GOOGLE_VERIFIED",
+        "cnic_verified": true,
+        "background_checked": false
+      },
+      "pricing": {
+        "visit_fee_pkr": 400,
+        "hourly_rate_pkr": 1200,
+        "emergency_surcharge": 0.4,
+        "estimated_total_pkr": 1500
+      },
+      "availability": {
+        "accepts_emergency": true,
+        "emergency_hours": "08:00-22:00",
+        "available_today": true,
+        "next_slot": "Today 4PM"
+      },
+      "is_active": true,
+      "experience_years": 5,
+      "tags": [
+        "AC_TECHNICIAN",
+        "BUDGET_FRIENDLY"
+      ]
+    },
+    {
+      "provider_id": "PRV-ISB-003",
+      "name": "Usman Tariq",
+      "business_name": "Capital Electricians",
+      "phone": "+92-333-9876543",
+      "service_categories": [
+        "ELECTRICIAN"
+      ],
+      "areas_served": [
+        "G-11",
+        "G-10",
+        "G-9",
+        "I-8",
+        "I-10",
+        "I-11",
+        "B-17"
+      ],
+      "city": "Islamabad",
+      "coordinates": {
+        "lat": 33.69,
+        "lng": 73.055
+      },
+      "rating": 4.9,
+      "review_count": 203,
+      "response_rate": 0.96,
+      "active_bookings": 0,
+      "verification": {
+        "level": "KHIDMATGAR_VERIFIED",
+        "cnic_verified": true,
+        "background_checked": true
+      },
+      "pricing": {
+        "visit_fee_pkr": 300,
+        "hourly_rate_pkr": 1000,
+        "emergency_surcharge": 0.6,
+        "estimated_total_pkr": 1200
+      },
+      "availability": {
+        "accepts_emergency": true,
+        "emergency_hours": "24/7",
+        "available_today": true,
+        "next_slot": "Today ASAP"
+      },
+      "is_active": true,
+      "experience_years": 12,
+      "tags": [
+        "ELECTRICIAN",
+        "WIRING",
+        "EXPERT",
+        "EMERGENCY_24_7"
+      ]
+    },
+    {
+      "provider_id": "PRV-KOTRI-001",
+      "name": "Zahid Electrician",
+      "business_name": "Zahid Electric Works Kotri",
+      "phone": "+92-300-5556667",
+      "service_categories": [
+        "ELECTRICIAN"
+      ],
+      "areas_served": [
+        "Kotri",
+        "Jamshoro",
+        "Hyderabad"
+      ],
+      "city": "Kotri",
+      "coordinates": {
+        "lat": 25.3683,
+        "lng": 68.3224
+      },
+      "rating": 4.9,
+      "review_count": 88,
+      "response_rate": 0.95,
+      "active_bookings": 0,
+      "verification": {
+        "level": "KHIDMATGAR_VERIFIED",
+        "cnic_verified": true,
+        "background_checked": true
+      },
+      "pricing": {
+        "visit_fee_pkr": 300,
+        "hourly_rate_pkr": 800,
+        "emergency_surcharge": 0.4,
+        "estimated_total_pkr": 1100
+      },
+      "availability": {
+        "accepts_emergency": true,
+        "emergency_hours": "24/7",
+        "available_today": true,
+        "next_slot": "Today ASAP"
+      },
+      "is_active": true,
+      "experience_years": 10,
+      "tags": [
+        "ELECTRICIAN",
+        "WIRING",
+        "EXPERT",
+        "EMERGENCY_24_7",
+        "KOTRI"
+      ]
+    },
+    {
+      "provider_id": "PRV-ISB-004",
+      "name": "Ahmed Hassan",
+      "business_name": "Islamabad Plumbing Co.",
+      "phone": "+92-345-1122334",
+      "service_categories": [
+        "PLUMBER"
+      ],
+      "areas_served": [
+        "F-10",
+        "F-11",
+        "G-10",
+        "G-11",
+        "G-14",
+        "G-15"
+      ],
+      "city": "Islamabad",
+      "coordinates": {
+        "lat": 33.71,
+        "lng": 73.02
+      },
+      "rating": 4.6,
+      "review_count": 156,
+      "response_rate": 0.91,
+      "active_bookings": 1,
+      "verification": {
+        "level": "KHIDMATGAR_VERIFIED",
+        "cnic_verified": true,
+        "background_checked": true
+      },
+      "pricing": {
+        "visit_fee_pkr": 350,
+        "hourly_rate_pkr": 900,
+        "emergency_surcharge": 0.5,
+        "estimated_total_pkr": 1200
+      },
+      "availability": {
+        "accepts_emergency": true,
+        "emergency_hours": "24/7",
+        "available_today": true,
+        "next_slot": "Today 3PM"
+      },
+      "is_active": true,
+      "experience_years": 10,
+      "tags": [
+        "PLUMBER",
+        "PIPE_REPAIR",
+        "DRAINAGE",
+        "EMERGENCY"
+      ]
+    },
+    {
+      "provider_id": "PRV-ISB-005",
+      "name": "Farooq Malik",
+      "business_name": "Master Carpenter Works",
+      "phone": "+92-311-5544332",
+      "service_categories": [
+        "CARPENTER"
+      ],
+      "areas_served": [
+        "G-11",
+        "G-9",
+        "G-8",
+        "F-8",
+        "F-7"
+      ],
+      "city": "Islamabad",
+      "coordinates": {
+        "lat": 33.695,
+        "lng": 73.062
+      },
+      "rating": 4.7,
+      "review_count": 92,
+      "response_rate": 0.89,
+      "active_bookings": 0,
+      "verification": {
+        "level": "GOOGLE_VERIFIED",
+        "cnic_verified": true,
+        "background_checked": false
+      },
+      "pricing": {
+        "visit_fee_pkr": 600,
+        "hourly_rate_pkr": 1800,
+        "emergency_surcharge": 0.3,
+        "estimated_total_pkr": 2500
+      },
+      "availability": {
+        "accepts_emergency": false,
+        "emergency_hours": "09:00-18:00",
+        "available_today": true,
+        "next_slot": "Tomorrow 10AM"
+      },
+      "is_active": true,
+      "experience_years": 15,
+      "tags": [
+        "CARPENTER",
+        "FURNITURE_REPAIR",
+        "DOOR_FITTING"
+      ]
+    },
+    {
+      "provider_id": "PRV-ISB-006",
+      "name": "Nadeem Khan",
+      "business_name": "CleanPro Services",
+      "phone": "+92-302-7788990",
+      "service_categories": [
+        "CLEANER"
+      ],
+      "areas_served": [
+        "F-6",
+        "F-7",
+        "F-8",
+        "G-6",
+        "G-7",
+        "G-8"
+      ],
+      "city": "Islamabad",
+      "coordinates": {
+        "lat": 33.72,
+        "lng": 73.09
+      },
+      "rating": 4.4,
+      "review_count": 211,
+      "response_rate": 0.93,
+      "active_bookings": 3,
+      "verification": {
+        "level": "KHIDMATGAR_VERIFIED",
+        "cnic_verified": true,
+        "background_checked": true
+      },
+      "pricing": {
+        "visit_fee_pkr": 200,
+        "hourly_rate_pkr": 700,
+        "emergency_surcharge": 0.2,
+        "estimated_total_pkr": 1500
+      },
+      "availability": {
+        "accepts_emergency": true,
+        "emergency_hours": "07:00-21:00",
+        "available_today": true,
+        "next_slot": "Today 5PM"
+      },
+      "is_active": true,
+      "experience_years": 6,
+      "tags": [
+        "CLEANER",
+        "DEEP_CLEANING",
+        "AFFORDABLE"
+      ]
+    },
+    {
+      "provider_id": "PRV-ISB-007",
+      "name": "Tariq Mehmood",
+      "business_name": "Pest-Free Pakistan",
+      "phone": "+92-315-4433221",
+      "service_categories": [
+        "PEST_CONTROL"
+      ],
+      "areas_served": [
+        "G-11",
+        "G-12",
+        "G-13",
+        "I-8",
+        "I-9",
+        "I-10",
+        "I-11"
+      ],
+      "city": "Islamabad",
+      "coordinates": {
+        "lat": 33.682,
+        "lng": 73.05
+      },
+      "rating": 4.7,
+      "review_count": 78,
+      "response_rate": 0.88,
+      "active_bookings": 1,
+      "verification": {
+        "level": "GOOGLE_VERIFIED",
+        "cnic_verified": true,
+        "background_checked": false
+      },
+      "pricing": {
+        "visit_fee_pkr": 1000,
+        "hourly_rate_pkr": 0,
+        "emergency_surcharge": 0.3,
+        "estimated_total_pkr": 2500
+      },
+      "availability": {
+        "accepts_emergency": true,
+        "emergency_hours": "08:00-20:00",
+        "available_today": true,
+        "next_slot": "Today 3PM"
+      },
+      "is_active": true,
+      "experience_years": 9,
+      "tags": [
+        "PEST_CONTROL",
+        "TERMITE",
+        "COCKROACH",
+        "CERTIFIED"
+      ]
+    },
+    {
+      "provider_id": "PRV-LHR-001",
+      "name": "Shahid Iqbal",
+      "business_name": "Lahore Cool AC Services",
+      "phone": "+92-300-5566778",
+      "service_categories": [
+        "AC_TECHNICIAN",
+        "APPLIANCE_REPAIR"
+      ],
+      "areas_served": [
+        "DHA Phase 1",
+        "DHA Phase 2",
+        "DHA Phase 4",
+        "Gulberg III",
+        "Model Town"
+      ],
+      "city": "Lahore",
+      "coordinates": {
+        "lat": 31.5204,
+        "lng": 74.3587
+      },
+      "rating": 4.7,
+      "review_count": 189,
+      "response_rate": 0.92,
+      "active_bookings": 2,
+      "verification": {
+        "level": "KHIDMATGAR_VERIFIED",
+        "cnic_verified": true,
+        "background_checked": true
+      },
+      "pricing": {
+        "visit_fee_pkr": 500,
+        "hourly_rate_pkr": 1400,
+        "emergency_surcharge": 0.5,
+        "estimated_total_pkr": 1800
+      },
+      "availability": {
+        "accepts_emergency": true,
+        "emergency_hours": "24/7",
+        "available_today": true,
+        "next_slot": "Today 2PM"
+      },
+      "is_active": true,
+      "experience_years": 7,
+      "tags": [
+        "AC_TECHNICIAN",
+        "LAHORE",
+        "EXPERT"
+      ]
+    },
+    {
+      "provider_id": "PRV-LHR-002",
+      "name": "Imran Butt",
+      "business_name": "Lahore Power Electricians",
+      "phone": "+92-323-9988776",
+      "service_categories": [
+        "ELECTRICIAN"
+      ],
+      "areas_served": [
+        "Johar Town",
+        "Garden Town",
+        "Iqbal Town",
+        "Faisal Town",
+        "Wapda Town"
+      ],
+      "city": "Lahore",
+      "coordinates": {
+        "lat": 31.47,
+        "lng": 74.35
+      },
+      "rating": 4.6,
+      "review_count": 143,
+      "response_rate": 0.89,
+      "active_bookings": 1,
+      "verification": {
+        "level": "GOOGLE_VERIFIED",
+        "cnic_verified": true,
+        "background_checked": false
+      },
+      "pricing": {
+        "visit_fee_pkr": 300,
+        "hourly_rate_pkr": 1100,
+        "emergency_surcharge": 0.5,
+        "estimated_total_pkr": 1300
+      },
+      "availability": {
+        "accepts_emergency": true,
+        "emergency_hours": "08:00-22:00",
+        "available_today": true,
+        "next_slot": "Today 4PM"
+      },
+      "is_active": true,
+      "experience_years": 11,
+      "tags": [
+        "ELECTRICIAN",
+        "LAHORE",
+        "RELIABLE"
+      ]
+    },
+    {
+      "provider_id": "PRV-KHI-001",
+      "name": "Zia ul Haq",
+      "business_name": "Karachi AC Masters",
+      "phone": "+92-300-1122334",
+      "service_categories": [
+        "AC_TECHNICIAN"
+      ],
+      "areas_served": [
+        "DHA Karachi",
+        "Clifton",
+        "Gulshan-e-Iqbal",
+        "North Nazimabad"
+      ],
+      "city": "Karachi",
+      "coordinates": {
+        "lat": 24.8607,
+        "lng": 67.0011
+      },
+      "rating": 4.8,
+      "review_count": 312,
+      "response_rate": 0.95,
+      "active_bookings": 3,
+      "verification": {
+        "level": "KHIDMATGAR_VERIFIED",
+        "cnic_verified": true,
+        "background_checked": true
+      },
+      "pricing": {
+        "visit_fee_pkr": 600,
+        "hourly_rate_pkr": 1600,
+        "emergency_surcharge": 0.4,
+        "estimated_total_pkr": 2000
+      },
+      "availability": {
+        "accepts_emergency": true,
+        "emergency_hours": "24/7",
+        "available_today": true,
+        "next_slot": "Today ASAP"
+      },
+      "is_active": true,
+      "experience_years": 14,
+      "tags": [
+        "AC_TECHNICIAN",
+        "KARACHI",
+        "TOP_RATED",
+        "EMERGENCY"
+      ]
+    },
+    {
+      "provider_id": "PRV-KHI-002",
+      "name": "Faisal Ahmed",
+      "business_name": "Karachi Plumbing Solutions",
+      "phone": "+92-321-9988112",
+      "service_categories": [
+        "PLUMBER"
+      ],
+      "areas_served": [
+        "Gulshan-e-Iqbal",
+        "Gulshan-e-Maymar",
+        "Liaquatabad",
+        "Nazimabad",
+        "Federal B Area"
+      ],
+      "city": "Karachi",
+      "coordinates": {
+        "lat": 24.92,
+        "lng": 67.08
+      },
+      "rating": 4.5,
+      "review_count": 167,
+      "response_rate": 0.9,
+      "active_bookings": 1,
+      "verification": {
+        "level": "GOOGLE_VERIFIED",
+        "cnic_verified": true,
+        "background_checked": false
+      },
+      "pricing": {
+        "visit_fee_pkr": 400,
+        "hourly_rate_pkr": 1000,
+        "emergency_surcharge": 0.5,
+        "estimated_total_pkr": 1400
+      },
+      "availability": {
+        "accepts_emergency": true,
+        "emergency_hours": "07:00-23:00",
+        "available_today": true,
+        "next_slot": "Today 6PM"
+      },
+      "is_active": true,
+      "experience_years": 8,
+      "tags": [
+        "PLUMBER",
+        "KARACHI",
+        "PIPE_BURST"
+      ]
+    },
+    {
+      "provider_id": "PRV-RWP-001",
+      "name": "Asif Mehmood",
+      "business_name": "Pindi Cool AC Services",
+      "phone": "+92-300-8877665",
+      "service_categories": [
+        "AC_TECHNICIAN",
+        "APPLIANCE_REPAIR"
+      ],
+      "areas_served": [
+        "Bahria Town",
+        "Gulraiz",
+        "Chaklala",
+        "Satellite Town",
+        "Khayaban-e-Sir Syed"
+      ],
+      "city": "Rawalpindi",
+      "coordinates": {
+        "lat": 33.6007,
+        "lng": 73.0679
+      },
+      "rating": 4.6,
+      "review_count": 98,
+      "response_rate": 0.88,
+      "active_bookings": 0,
+      "verification": {
+        "level": "GOOGLE_VERIFIED",
+        "cnic_verified": true,
+        "background_checked": false
+      },
+      "pricing": {
+        "visit_fee_pkr": 450,
+        "hourly_rate_pkr": 1300,
+        "emergency_surcharge": 0.4,
+        "estimated_total_pkr": 1700
+      },
+      "availability": {
+        "accepts_emergency": true,
+        "emergency_hours": "08:00-22:00",
+        "available_today": true,
+        "next_slot": "Today 3PM"
+      },
+      "is_active": true,
+      "experience_years": 6,
+      "tags": [
+        "AC_TECHNICIAN",
+        "RAWALPINDI",
+        "BAHRIA"
+      ]
+    },
+    {
+      "provider_id": "PRV-ISB-008",
+      "name": "Rashid Ali",
+      "business_name": "HomeGuard Security",
+      "phone": "+92-333-2211009",
+      "service_categories": [
+        "SECURITY_GUARD"
+      ],
+      "areas_served": [
+        "F-7",
+        "F-8",
+        "E-7",
+        "E-11",
+        "F-10",
+        "F-11"
+      ],
+      "city": "Islamabad",
+      "coordinates": {
+        "lat": 33.735,
+        "lng": 73.085
+      },
+      "rating": 4.3,
+      "review_count": 44,
+      "response_rate": 0.82,
+      "active_bookings": 5,
+      "verification": {
+        "level": "KHIDMATGAR_VERIFIED",
+        "cnic_verified": true,
+        "background_checked": true
+      },
+      "pricing": {
+        "visit_fee_pkr": 0,
+        "hourly_rate_pkr": 500,
+        "emergency_surcharge": 0.2,
+        "estimated_total_pkr": 4000
+      },
+      "availability": {
+        "accepts_emergency": true,
+        "emergency_hours": "24/7",
+        "available_today": true,
+        "next_slot": "Today 6PM"
+      },
+      "is_active": true,
+      "experience_years": 20,
+      "tags": [
+        "SECURITY_GUARD",
+        "ARMED",
+        "TRAINED",
+        "ISLAMABAD"
+      ]
+    },
+    {
+      "provider_id": "PRV-ISB-009",
+      "name": "Zahid Hussain",
+      "business_name": "CookMaster Home Chefs",
+      "phone": "+92-312-3344556",
+      "service_categories": [
+        "COOK"
+      ],
+      "areas_served": [
+        "G-11",
+        "G-10",
+        "G-9",
+        "F-7",
+        "F-8",
+        "E-7"
+      ],
+      "city": "Islamabad",
+      "coordinates": {
+        "lat": 33.698,
+        "lng": 73.07
+      },
+      "rating": 4.9,
+      "review_count": 67,
+      "response_rate": 0.97,
+      "active_bookings": 1,
+      "verification": {
+        "level": "KHIDMATGAR_VERIFIED",
+        "cnic_verified": true,
+        "background_checked": true
+      },
+      "pricing": {
+        "visit_fee_pkr": 800,
+        "hourly_rate_pkr": 2000,
+        "emergency_surcharge": 0.3,
+        "estimated_total_pkr": 3000
+      },
+      "availability": {
+        "accepts_emergency": false,
+        "emergency_hours": "10:00-20:00",
+        "available_today": true,
+        "next_slot": "Tomorrow Lunch"
+      },
+      "is_active": true,
+      "experience_years": 10,
+      "tags": [
+        "COOK",
+        "DESI_FOOD",
+        "CONTINENTAL",
+        "TOP_RATED"
+      ]
+    },
+    {
+      "provider_id": "PRV-ISB-010",
+      "name": "Hassan Ali",
+      "business_name": "Islamabad Paint Masters",
+      "phone": "+92-305-6677889",
+      "service_categories": [
+        "PAINTER"
+      ],
+      "areas_served": [
+        "G-11",
+        "G-12",
+        "G-13",
+        "I-8",
+        "I-9",
+        "B-17",
+        "D-12"
+      ],
+      "city": "Islamabad",
+      "coordinates": {
+        "lat": 33.683,
+        "lng": 73.055
+      },
+      "rating": 4.5,
+      "review_count": 121,
+      "response_rate": 0.86,
+      "active_bookings": 2,
+      "verification": {
+        "level": "GOOGLE_VERIFIED",
+        "cnic_verified": true,
+        "background_checked": false
+      },
+      "pricing": {
+        "visit_fee_pkr": 500,
+        "hourly_rate_pkr": 1200,
+        "emergency_surcharge": 0.2,
+        "estimated_total_pkr": 5000
+      },
+      "availability": {
+        "accepts_emergency": false,
+        "emergency_hours": "09:00-17:00",
+        "available_today": false,
+        "next_slot": "Tomorrow 9AM"
+      },
+      "is_active": true,
+      "experience_years": 13,
+      "tags": [
+        "PAINTER",
+        "INTERIOR",
+        "EXTERIOR",
+        "QUALITY"
+      ]
+    },
+    {
+      "provider_id": "PRV-ISB-001",
+      "name": "Muhammad Ali",
+      "business_name": "Ali AC & Cooling Services",
+      "phone": "+92-300-1234567",
+      "service_categories": [
+        "AC_TECHNICIAN",
+        "APPLIANCE_REPAIR"
+      ],
+      "areas_served": [
+        "G-11",
+        "G-12",
+        "G-13",
+        "I-8",
+        "I-9",
+        "I-10"
+      ],
+      "city": "Islamabad",
+      "coordinates": {
+        "lat": 33.6844,
+        "lng": 73.0479
+      },
+      "rating": 4.8,
+      "review_count": 127,
+      "response_rate": 0.94,
+      "active_bookings": 2,
+      "verification": {
+        "level": "KHIDMATGAR_VERIFIED",
+        "cnic_verified": true,
+        "background_checked": true
+      },
+      "pricing": {
+        "visit_fee_pkr": 500,
+        "hourly_rate_pkr": 1500,
+        "emergency_surcharge": 0.5,
+        "estimated_total_pkr": 2000
+      },
+      "availability": {
+        "accepts_emergency": true,
+        "emergency_hours": "24/7",
+        "available_today": true,
+        "next_slot": "Today 2PM"
+      },
+      "is_active": true,
+      "experience_years": 8,
+      "tags": [
+        "AC_TECHNICIAN",
+        "INVERTER_AC",
+        "EXPERT",
+        "FAST_RESPONSE"
+      ]
+    },
+    {
+      "provider_id": "PRV-ISB-002",
+      "name": "Tariq Mehmood",
+      "business_name": "CoolBreeze Technicians",
+      "phone": "+92-311-9876543",
+      "service_categories": [
+        "AC_TECHNICIAN"
+      ],
+      "areas_served": [
+        "F-7",
+        "F-8",
+        "F-10",
+        "E-7",
+        "G-10"
+      ],
+      "city": "Islamabad",
+      "coordinates": {
+        "lat": 33.718,
+        "lng": 73.0654
+      },
+      "rating": 4.6,
+      "review_count": 89,
+      "response_rate": 0.88,
+      "active_bookings": 1,
+      "verification": {
+        "level": "GOOGLE_VERIFIED",
+        "cnic_verified": true,
+        "background_checked": false
+      },
+      "pricing": {
+        "visit_fee_pkr": 400,
+        "hourly_rate_pkr": 1200,
+        "emergency_surcharge": 0.5,
+        "estimated_total_pkr": 1600
+      },
+      "availability": {
+        "accepts_emergency": true,
+        "emergency_hours": "8AM-10PM",
+        "available_today": true,
+        "next_slot": "Today 4PM"
+      },
+      "is_active": true,
+      "experience_years": 5,
+      "tags": [
+        "AC_TECHNICIAN",
+        "SPLIT_AC",
+        "WINDOW_AC"
+      ]
+    },
+    {
+      "provider_id": "PRV-ISB-003",
+      "name": "Usman Qureshi",
+      "business_name": "FastFix Electricians",
+      "phone": "+92-321-5551234",
+      "service_categories": [
+        "ELECTRICIAN"
+      ],
+      "areas_served": [
+        "G-9",
+        "G-10",
+        "G-11",
+        "G-13",
+        "H-8",
+        "H-9"
+      ],
+      "city": "Islamabad",
+      "coordinates": {
+        "lat": 33.6938,
+        "lng": 73.0652
+      },
+      "rating": 4.9,
+      "review_count": 203,
+      "response_rate": 0.97,
+      "active_bookings": 0,
+      "verification": {
+        "level": "KHIDMATGAR_VERIFIED",
+        "cnic_verified": true,
+        "background_checked": true
+      },
+      "pricing": {
+        "visit_fee_pkr": 300,
+        "hourly_rate_pkr": 1000,
+        "emergency_surcharge": 0.75,
+        "estimated_total_pkr": 1300
+      },
+      "availability": {
+        "accepts_emergency": true,
+        "emergency_hours": "24/7",
+        "available_today": true,
+        "next_slot": "Today ASAP"
+      },
+      "is_active": true,
+      "experience_years": 12,
+      "tags": [
+        "ELECTRICIAN",
+        "WIRING",
+        "PANEL_BOX",
+        "EMERGENCY_EXPERT"
+      ]
+    },
+    {
+      "provider_id": "PRV-ISB-004",
+      "name": "Bilal Hussain",
+      "business_name": "Plumb Perfect Solutions",
+      "phone": "+92-333-4447777",
+      "service_categories": [
+        "PLUMBER"
+      ],
+      "areas_served": [
+        "F-6",
+        "F-7",
+        "F-8",
+        "G-6",
+        "G-7",
+        "Blue Area"
+      ],
+      "city": "Islamabad",
+      "coordinates": {
+        "lat": 33.7292,
+        "lng": 73.0931
+      },
+      "rating": 4.7,
+      "review_count": 156,
+      "response_rate": 0.91,
+      "active_bookings": 1,
+      "verification": {
+        "level": "KHIDMATGAR_VERIFIED",
+        "cnic_verified": true,
+        "background_checked": true
+      },
+      "pricing": {
+        "visit_fee_pkr": 350,
+        "hourly_rate_pkr": 900,
+        "emergency_surcharge": 0.5,
+        "estimated_total_pkr": 1250
+      },
+      "availability": {
+        "accepts_emergency": true,
+        "emergency_hours": "24/7",
+        "available_today": true,
+        "next_slot": "Today 1PM"
+      },
+      "is_active": true,
+      "experience_years": 10,
+      "tags": [
+        "PLUMBER",
+        "PIPE_BURST",
+        "WATER_TANK",
+        "DRAINAGE"
+      ]
+    },
+    {
+      "provider_id": "PRV-ISB-005",
+      "name": "Ahmed Raza",
+      "business_name": "Raza Carpentry Workshop",
+      "phone": "+92-345-2223344",
+      "service_categories": [
+        "CARPENTER"
+      ],
+      "areas_served": [
+        "I-10",
+        "I-11",
+        "G-13",
+        "H-13"
+      ],
+      "city": "Islamabad",
+      "coordinates": {
+        "lat": 33.67,
+        "lng": 73.03
+      },
+      "rating": 4.5,
+      "review_count": 67,
+      "response_rate": 0.82,
+      "active_bookings": 3,
+      "verification": {
+        "level": "GOOGLE_VERIFIED",
+        "cnic_verified": true,
+        "background_checked": false
+      },
+      "pricing": {
+        "visit_fee_pkr": 400,
+        "hourly_rate_pkr": 1100,
+        "emergency_surcharge": 0.25,
+        "estimated_total_pkr": 1500
+      },
+      "availability": {
+        "accepts_emergency": false,
+        "emergency_hours": "9AM-6PM",
+        "available_today": true,
+        "next_slot": "Tomorrow 10AM"
+      },
+      "is_active": true,
+      "experience_years": 15,
+      "tags": [
+        "CARPENTER",
+        "FURNITURE",
+        "DOOR_REPAIR",
+        "CUSTOM_WOOD"
+      ]
+    },
+    {
+      "provider_id": "PRV-ISB-006",
+      "name": "Sana Bibi",
+      "business_name": "CleanHome Services",
+      "phone": "+92-307-6665555",
+      "service_categories": [
+        "CLEANER"
+      ],
+      "areas_served": [
+        "F-7",
+        "F-8",
+        "F-10",
+        "E-7",
+        "G-9",
+        "G-10"
+      ],
+      "city": "Islamabad",
+      "coordinates": {
+        "lat": 33.71,
+        "lng": 73.07
+      },
+      "rating": 4.9,
+      "review_count": 312,
+      "response_rate": 0.98,
+      "active_bookings": 1,
+      "verification": {
+        "level": "KHIDMATGAR_VERIFIED",
+        "cnic_verified": true,
+        "background_checked": true
+      },
+      "pricing": {
+        "visit_fee_pkr": 200,
+        "hourly_rate_pkr": 700,
+        "emergency_surcharge": 0.0,
+        "estimated_total_pkr": 1400
+      },
+      "availability": {
+        "accepts_emergency": false,
+        "emergency_hours": "8AM-8PM",
+        "available_today": true,
+        "next_slot": "Today 11AM"
+      },
+      "is_active": true,
+      "experience_years": 6,
+      "tags": [
+        "CLEANER",
+        "DEEP_CLEAN",
+        "FEMALE_STAFF",
+        "TRUSTED"
+      ]
+    },
+    {
+      "provider_id": "PRV-ISB-007",
+      "name": "Dr. Naveed Akhtar",
+      "business_name": "HomeGuard Pest Solutions",
+      "phone": "+92-302-8889999",
+      "service_categories": [
+        "PEST_CONTROL"
+      ],
+      "areas_served": [
+        "G-11",
+        "G-12",
+        "G-13",
+        "F-11",
+        "F-10",
+        "I-8"
+      ],
+      "city": "Islamabad",
+      "coordinates": {
+        "lat": 33.69,
+        "lng": 73.05
+      },
+      "rating": 4.8,
+      "review_count": 98,
+      "response_rate": 0.9,
+      "active_bookings": 0,
+      "verification": {
+        "level": "KHIDMATGAR_VERIFIED",
+        "cnic_verified": true,
+        "background_checked": true
+      },
+      "pricing": {
+        "visit_fee_pkr": 0,
+        "hourly_rate_pkr": 0,
+        "emergency_surcharge": 0.0,
+        "estimated_total_pkr": 3500
+      },
+      "availability": {
+        "accepts_emergency": true,
+        "emergency_hours": "8AM-10PM",
+        "available_today": true,
+        "next_slot": "Today 3PM"
+      },
+      "is_active": true,
+      "experience_years": 7,
+      "tags": [
+        "PEST_CONTROL",
+        "FUMIGATION",
+        "COCKROACHES",
+        "TERMITES",
+        "CERTIFIED"
+      ]
+    },
+    {
+      "provider_id": "PRV-ISB-008",
+      "name": "Rubina Khan",
+      "business_name": "Rubina Beauty at Home",
+      "phone": "+92-315-1112222",
+      "service_categories": [
+        "BEAUTY_SERVICES"
+      ],
+      "areas_served": [
+        "F-7",
+        "F-6",
+        "G-6",
+        "G-7",
+        "Blue Area"
+      ],
+      "city": "Islamabad",
+      "coordinates": {
+        "lat": 33.72,
+        "lng": 73.08
+      },
+      "rating": 4.7,
+      "review_count": 185,
+      "response_rate": 0.93,
+      "active_bookings": 2,
+      "verification": {
+        "level": "KHIDMATGAR_VERIFIED",
+        "cnic_verified": true,
+        "background_checked": true
+      },
+      "pricing": {
+        "visit_fee_pkr": 300,
+        "hourly_rate_pkr": 1200,
+        "emergency_surcharge": 0.0,
+        "estimated_total_pkr": 2000
+      },
+      "availability": {
+        "accepts_emergency": false,
+        "emergency_hours": "9AM-9PM",
+        "available_today": true,
+        "next_slot": "Today 5PM"
+      },
+      "is_active": true,
+      "experience_years": 8,
+      "tags": [
+        "BEAUTY_SERVICES",
+        "BRIDAL",
+        "MAKEUP",
+        "HAIR",
+        "FEMALE_ONLY"
+      ]
+    },
+    {
+      "provider_id": "PRV-ISB-009",
+      "name": "Fahad Malik",
+      "business_name": "Malik Painting Co.",
+      "phone": "+92-323-3334444",
+      "service_categories": [
+        "PAINTER"
+      ],
+      "areas_served": [
+        "G-11",
+        "G-12",
+        "G-13",
+        "I-8",
+        "I-9",
+        "I-10",
+        "H-13"
+      ],
+      "city": "Islamabad",
+      "coordinates": {
+        "lat": 33.68,
+        "lng": 73.04
+      },
+      "rating": 4.4,
+      "review_count": 55,
+      "response_rate": 0.78,
+      "active_bookings": 4,
+      "verification": {
+        "level": "GOOGLE_VERIFIED",
+        "cnic_verified": true,
+        "background_checked": false
+      },
+      "pricing": {
+        "visit_fee_pkr": 0,
+        "hourly_rate_pkr": 800,
+        "emergency_surcharge": 0.0,
+        "estimated_total_pkr": 5000
+      },
+      "availability": {
+        "accepts_emergency": false,
+        "emergency_hours": "8AM-6PM",
+        "available_today": false,
+        "next_slot": "Tomorrow 9AM"
+      },
+      "is_active": true,
+      "experience_years": 11,
+      "tags": [
+        "PAINTER",
+        "INTERIOR",
+        "EXTERIOR",
+        "AFFORDABLE"
+      ]
+    },
+    {
+      "provider_id": "PRV-ISB-010",
+      "name": "Zeeshan Ali",
+      "business_name": "Prime Home Tutor",
+      "phone": "+92-336-5556666",
+      "service_categories": [
+        "TUTOR"
+      ],
+      "areas_served": [
+        "F-7",
+        "F-8",
+        "F-10",
+        "G-9",
+        "G-10",
+        "G-11"
+      ],
+      "city": "Islamabad",
+      "coordinates": {
+        "lat": 33.705,
+        "lng": 73.06
+      },
+      "rating": 4.9,
+      "review_count": 240,
+      "response_rate": 0.95,
+      "active_bookings": 2,
+      "verification": {
+        "level": "KHIDMATGAR_VERIFIED",
+        "cnic_verified": true,
+        "background_checked": true
+      },
+      "pricing": {
+        "visit_fee_pkr": 0,
+        "hourly_rate_pkr": 1500,
+        "emergency_surcharge": 0.0,
+        "estimated_total_pkr": 3000
+      },
+      "availability": {
+        "accepts_emergency": false,
+        "emergency_hours": "2PM-10PM",
+        "available_today": true,
+        "next_slot": "Today 4PM"
+      },
+      "is_active": true,
+      "experience_years": 5,
+      "tags": [
+        "TUTOR",
+        "MATHS",
+        "PHYSICS",
+        "CHEMISTRY",
+        "O_LEVELS",
+        "A_LEVELS"
+      ]
+    },
+    {
+      "provider_id": "PRV-ISB-011",
+      "name": "Amir Shah",
+      "business_name": "Capital Mechanic Workshop",
+      "phone": "+92-347-7778888",
+      "service_categories": [
+        "MECHANIC"
+      ],
+      "areas_served": [
+        "G-11",
+        "G-12",
+        "G-13",
+        "I-9",
+        "I-10"
+      ],
+      "city": "Islamabad",
+      "coordinates": {
+        "lat": 33.685,
+        "lng": 73.052
+      },
+      "rating": 4.6,
+      "review_count": 134,
+      "response_rate": 0.87,
+      "active_bookings": 1,
+      "verification": {
+        "level": "KHIDMATGAR_VERIFIED",
+        "cnic_verified": true,
+        "background_checked": true
+      },
+      "pricing": {
+        "visit_fee_pkr": 500,
+        "hourly_rate_pkr": 1200,
+        "emergency_surcharge": 0.5,
+        "estimated_total_pkr": 1700
+      },
+      "availability": {
+        "accepts_emergency": true,
+        "emergency_hours": "8AM-10PM",
+        "available_today": true,
+        "next_slot": "Today ASAP"
+      },
+      "is_active": true,
+      "experience_years": 9,
+      "tags": [
+        "MECHANIC",
+        "ROADSIDE_ASSIST",
+        "TYRE",
+        "ENGINE",
+        "BATTERY"
+      ]
+    },
+    {
+      "provider_id": "PRV-KHI-001",
+      "name": "Nadeem Sheikh",
+      "business_name": "Sheikh AC Services Karachi",
+      "phone": "+92-300-9876543",
+      "service_categories": [
+        "AC_TECHNICIAN",
+        "APPLIANCE_REPAIR"
+      ],
+      "areas_served": [
+        "DHA Phase 2",
+        "DHA Phase 3",
+        "Clifton",
+        "Zamzama",
+        "Seaview"
+      ],
+      "city": "Karachi",
+      "coordinates": {
+        "lat": 24.8219,
+        "lng": 67.0331
+      },
+      "rating": 4.9,
+      "review_count": 312,
+      "response_rate": 0.96,
+      "active_bookings": 1,
+      "verification": {
+        "level": "KHIDMATGAR_VERIFIED",
+        "cnic_verified": true,
+        "background_checked": true
+      },
+      "pricing": {
+        "visit_fee_pkr": 600,
+        "hourly_rate_pkr": 1800,
+        "emergency_surcharge": 0.5,
+        "estimated_total_pkr": 2400
+      },
+      "availability": {
+        "accepts_emergency": true,
+        "emergency_hours": "24/7",
+        "available_today": true,
+        "next_slot": "Today ASAP"
+      },
+      "is_active": true,
+      "experience_years": 15,
+      "tags": [
+        "AC_TECHNICIAN",
+        "INVERTER_AC",
+        "DAIKIN",
+        "GREE",
+        "FAST_RESPONSE",
+        "PREMIUM"
+      ]
+    },
+    {
+      "provider_id": "PRV-KHI-002",
+      "name": "Imran Baloch",
+      "business_name": "KorangiTech Electrician",
+      "phone": "+92-321-4443333",
+      "service_categories": [
+        "ELECTRICIAN"
+      ],
+      "areas_served": [
+        "Gulshan-e-Iqbal",
+        "Gulistan-e-Johar",
+        "Korangi",
+        "PECHS"
+      ],
+      "city": "Karachi",
+      "coordinates": {
+        "lat": 24.9029,
+        "lng": 67.1117
+      },
+      "rating": 4.7,
+      "review_count": 189,
+      "response_rate": 0.9,
+      "active_bookings": 2,
+      "verification": {
+        "level": "KHIDMATGAR_VERIFIED",
+        "cnic_verified": true,
+        "background_checked": true
+      },
+      "pricing": {
+        "visit_fee_pkr": 350,
+        "hourly_rate_pkr": 1100,
+        "emergency_surcharge": 0.75,
+        "estimated_total_pkr": 1450
+      },
+      "availability": {
+        "accepts_emergency": true,
+        "emergency_hours": "24/7",
+        "available_today": true,
+        "next_slot": "Today 1PM"
+      },
+      "is_active": true,
+      "experience_years": 10,
+      "tags": [
+        "ELECTRICIAN",
+        "WIRING",
+        "MCBS",
+        "INDUSTRIAL",
+        "RESIDENTIAL"
+      ]
+    },
+    {
+      "provider_id": "PRV-KHI-003",
+      "name": "Hassan Memon",
+      "business_name": "Memon Plumbing Works",
+      "phone": "+92-333-6667778",
+      "service_categories": [
+        "PLUMBER"
+      ],
+      "areas_served": [
+        "Nazimabad",
+        "North Nazimabad",
+        "New Karachi",
+        "Orangi"
+      ],
+      "city": "Karachi",
+      "coordinates": {
+        "lat": 24.933,
+        "lng": 67.0436
+      },
+      "rating": 4.5,
+      "review_count": 98,
+      "response_rate": 0.85,
+      "active_bookings": 0,
+      "verification": {
+        "level": "GOOGLE_VERIFIED",
+        "cnic_verified": true,
+        "background_checked": false
+      },
+      "pricing": {
+        "visit_fee_pkr": 300,
+        "hourly_rate_pkr": 900,
+        "emergency_surcharge": 0.5,
+        "estimated_total_pkr": 1200
+      },
+      "availability": {
+        "accepts_emergency": true,
+        "emergency_hours": "24/7",
+        "available_today": true,
+        "next_slot": "Today ASAP"
+      },
+      "is_active": true,
+      "experience_years": 8,
+      "tags": [
+        "PLUMBER",
+        "PIPE_BURST",
+        "EMERGENCY",
+        "WATER_TANK",
+        "AFFORDABLE"
+      ]
+    },
+    {
+      "provider_id": "PRV-KHI-004",
+      "name": "Zara Siddiqui",
+      "business_name": "Glamour Touch Beauty",
+      "phone": "+92-307-1112345",
+      "service_categories": [
+        "BEAUTY_SERVICES"
+      ],
+      "areas_served": [
+        "DHA Phase 2",
+        "Clifton",
+        "Zamzama",
+        "PECHS",
+        "Defence"
+      ],
+      "city": "Karachi",
+      "coordinates": {
+        "lat": 24.818,
+        "lng": 67.058
+      },
+      "rating": 4.9,
+      "review_count": 445,
+      "response_rate": 0.97,
+      "active_bookings": 3,
+      "verification": {
+        "level": "KHIDMATGAR_VERIFIED",
+        "cnic_verified": true,
+        "background_checked": true
+      },
+      "pricing": {
+        "visit_fee_pkr": 400,
+        "hourly_rate_pkr": 1500,
+        "emergency_surcharge": 0.0,
+        "estimated_total_pkr": 2500
+      },
+      "availability": {
+        "accepts_emergency": false,
+        "emergency_hours": "10AM-9PM",
+        "available_today": true,
+        "next_slot": "Today 6PM"
+      },
+      "is_active": true,
+      "experience_years": 7,
+      "tags": [
+        "BEAUTY_SERVICES",
+        "BRIDAL",
+        "MEHNDI",
+        "MAKEUP",
+        "PREMIUM",
+        "FEMALE_ONLY"
+      ]
+    },
+    {
+      "provider_id": "PRV-KHI-005",
+      "name": "Khalid Pathan",
+      "business_name": "SuperClean Karachi",
+      "phone": "+92-315-9998877",
+      "service_categories": [
+        "CLEANER",
+        "PEST_CONTROL"
+      ],
+      "areas_served": [
+        "Gulshan-e-Iqbal",
+        "Gulistan-e-Johar",
+        "Federal B Area",
+        "Scheme 33"
+      ],
+      "city": "Karachi",
+      "coordinates": {
+        "lat": 24.92,
+        "lng": 67.1
+      },
+      "rating": 4.6,
+      "review_count": 223,
+      "response_rate": 0.91,
+      "active_bookings": 1,
+      "verification": {
+        "level": "KHIDMATGAR_VERIFIED",
+        "cnic_verified": true,
+        "background_checked": true
+      },
+      "pricing": {
+        "visit_fee_pkr": 0,
+        "hourly_rate_pkr": 0,
+        "emergency_surcharge": 0.0,
+        "estimated_total_pkr": 4000
+      },
+      "availability": {
+        "accepts_emergency": false,
+        "emergency_hours": "8AM-8PM",
+        "available_today": true,
+        "next_slot": "Today 10AM"
+      },
+      "is_active": true,
+      "experience_years": 5,
+      "tags": [
+        "CLEANER",
+        "DEEP_CLEAN",
+        "PEST_CONTROL",
+        "FUMIGATION",
+        "TEAM_OF_4"
+      ]
+    },
+    {
+      "provider_id": "PRV-KHI-006",
+      "name": "Shahzad Ahmed",
+      "business_name": "KHI Auto Mechanic",
+      "phone": "+92-323-4445566",
+      "service_categories": [
+        "MECHANIC"
+      ],
+      "areas_served": [
+        "DHA Phase 2",
+        "DHA Phase 4",
+        "Clifton",
+        "Seaview",
+        "Zamzama"
+      ],
+      "city": "Karachi",
+      "coordinates": {
+        "lat": 24.81,
+        "lng": 67.04
+      },
+      "rating": 4.8,
+      "review_count": 178,
+      "response_rate": 0.93,
+      "active_bookings": 2,
+      "verification": {
+        "level": "KHIDMATGAR_VERIFIED",
+        "cnic_verified": true,
+        "background_checked": true
+      },
+      "pricing": {
+        "visit_fee_pkr": 600,
+        "hourly_rate_pkr": 1500,
+        "emergency_surcharge": 0.5,
+        "estimated_total_pkr": 2100
+      },
+      "availability": {
+        "accepts_emergency": true,
+        "emergency_hours": "8AM-11PM",
+        "available_today": true,
+        "next_slot": "Today ASAP"
+      },
+      "is_active": true,
+      "experience_years": 13,
+      "tags": [
+        "MECHANIC",
+        "ROADSIDE_ASSIST",
+        "ENGINE",
+        "TYRES",
+        "PREMIUM"
+      ]
+    },
+    {
+      "provider_id": "PRV-LHR-001",
+      "name": "Faisal Butt",
+      "business_name": "Butt AC Solutions",
+      "phone": "+92-302-1112222",
+      "service_categories": [
+        "AC_TECHNICIAN",
+        "APPLIANCE_REPAIR"
+      ],
+      "areas_served": [
+        "DHA Lahore",
+        "Model Town",
+        "Gulberg",
+        "Garden Town",
+        "Johar Town"
+      ],
+      "city": "Lahore",
+      "coordinates": {
+        "lat": 31.5204,
+        "lng": 74.3587
+      },
+      "rating": 4.9,
+      "review_count": 289,
+      "response_rate": 0.96,
+      "active_bookings": 1,
+      "verification": {
+        "level": "KHIDMATGAR_VERIFIED",
+        "cnic_verified": true,
+        "background_checked": true
+      },
+      "pricing": {
+        "visit_fee_pkr": 500,
+        "hourly_rate_pkr": 1600,
+        "emergency_surcharge": 0.5,
+        "estimated_total_pkr": 2100
+      },
+      "availability": {
+        "accepts_emergency": true,
+        "emergency_hours": "24/7",
+        "available_today": true,
+        "next_slot": "Today ASAP"
+      },
+      "is_active": true,
+      "experience_years": 12,
+      "tags": [
+        "AC_TECHNICIAN",
+        "INVERTER_AC",
+        "HAIER",
+        "LG",
+        "SAMSUNG",
+        "FAST_RESPONSE"
+      ]
+    },
+    {
+      "provider_id": "PRV-LHR-002",
+      "name": "Rizwan Khalil",
+      "business_name": "LHR Electric Masters",
+      "phone": "+92-331-5556677",
+      "service_categories": [
+        "ELECTRICIAN"
+      ],
+      "areas_served": [
+        "Gulberg",
+        "Model Town",
+        "Garden Town",
+        "Shadman"
+      ],
+      "city": "Lahore",
+      "coordinates": {
+        "lat": 31.5091,
+        "lng": 74.3357
+      },
+      "rating": 4.8,
+      "review_count": 201,
+      "response_rate": 0.92,
+      "active_bookings": 0,
+      "verification": {
+        "level": "KHIDMATGAR_VERIFIED",
+        "cnic_verified": true,
+        "background_checked": true
+      },
+      "pricing": {
+        "visit_fee_pkr": 300,
+        "hourly_rate_pkr": 1000,
+        "emergency_surcharge": 0.75,
+        "estimated_total_pkr": 1300
+      },
+      "availability": {
+        "accepts_emergency": true,
+        "emergency_hours": "24/7",
+        "available_today": true,
+        "next_slot": "Today ASAP"
+      },
+      "is_active": true,
+      "experience_years": 8,
+      "tags": [
+        "ELECTRICIAN",
+        "EMERGENCY",
+        "WIRING",
+        "PANEL_BOX",
+        "CERTIFIED"
+      ]
+    },
+    {
+      "provider_id": "PRV-LHR-003",
+      "name": "Waseem Akram",
+      "business_name": "Waseem Plumbing Services",
+      "phone": "+92-344-7778899",
+      "service_categories": [
+        "PLUMBER"
+      ],
+      "areas_served": [
+        "Johar Town",
+        "Township",
+        "Valencia",
+        "Wapda Town"
+      ],
+      "city": "Lahore",
+      "coordinates": {
+        "lat": 31.4697,
+        "lng": 74.2758
+      },
+      "rating": 4.6,
+      "review_count": 142,
+      "response_rate": 0.88,
+      "active_bookings": 1,
+      "verification": {
+        "level": "GOOGLE_VERIFIED",
+        "cnic_verified": true,
+        "background_checked": false
+      },
+      "pricing": {
+        "visit_fee_pkr": 350,
+        "hourly_rate_pkr": 950,
+        "emergency_surcharge": 0.5,
+        "estimated_total_pkr": 1300
+      },
+      "availability": {
+        "accepts_emergency": true,
+        "emergency_hours": "6AM-11PM",
+        "available_today": true,
+        "next_slot": "Today 2PM"
+      },
+      "is_active": true,
+      "experience_years": 14,
+      "tags": [
+        "PLUMBER",
+        "PIPE_BURST",
+        "SOLAR_WATER",
+        "GEYSER"
+      ]
+    },
+    {
+      "provider_id": "PRV-LHR-004",
+      "name": "Saima Malik",
+      "business_name": "Saima Beauty Parlour Home",
+      "phone": "+92-305-2223334",
+      "service_categories": [
+        "BEAUTY_SERVICES"
+      ],
+      "areas_served": [
+        "DHA Lahore",
+        "Gulberg",
+        "Model Town",
+        "Cavalry Ground"
+      ],
+      "city": "Lahore",
+      "coordinates": {
+        "lat": 31.5,
+        "lng": 74.37
+      },
+      "rating": 4.8,
+      "review_count": 378,
+      "response_rate": 0.95,
+      "active_bookings": 2,
+      "verification": {
+        "level": "KHIDMATGAR_VERIFIED",
+        "cnic_verified": true,
+        "background_checked": true
+      },
+      "pricing": {
+        "visit_fee_pkr": 350,
+        "hourly_rate_pkr": 1300,
+        "emergency_surcharge": 0.0,
+        "estimated_total_pkr": 2200
+      },
+      "availability": {
+        "accepts_emergency": false,
+        "emergency_hours": "9AM-9PM",
+        "available_today": true,
+        "next_slot": "Today 3PM"
+      },
+      "is_active": true,
+      "experience_years": 10,
+      "tags": [
+        "BEAUTY_SERVICES",
+        "BRIDAL_MAKEUP",
+        "FACIALS",
+        "THREADING",
+        "FEMALE_ONLY"
+      ]
+    },
+    {
+      "provider_id": "PRV-LHR-005",
+      "name": "Asif Raza",
+      "business_name": "Raza Carpenter Studio",
+      "phone": "+92-316-3334455",
+      "service_categories": [
+        "CARPENTER"
+      ],
+      "areas_served": [
+        "DHA Lahore",
+        "Model Town",
+        "Gulberg",
+        "Bahria Town"
+      ],
+      "city": "Lahore",
+      "coordinates": {
+        "lat": 31.49,
+        "lng": 74.365
+      },
+      "rating": 4.7,
+      "review_count": 112,
+      "response_rate": 0.86,
+      "active_bookings": 2,
+      "verification": {
+        "level": "KHIDMATGAR_VERIFIED",
+        "cnic_verified": true,
+        "background_checked": true
+      },
+      "pricing": {
+        "visit_fee_pkr": 400,
+        "hourly_rate_pkr": 1200,
+        "emergency_surcharge": 0.0,
+        "estimated_total_pkr": 2000
+      },
+      "availability": {
+        "accepts_emergency": false,
+        "emergency_hours": "8AM-7PM",
+        "available_today": true,
+        "next_slot": "Tomorrow 9AM"
+      },
+      "is_active": true,
+      "experience_years": 18,
+      "tags": [
+        "CARPENTER",
+        "FURNITURE_REPAIR",
+        "DOOR",
+        "WINDOW",
+        "CUSTOM_FURNITURE"
+      ]
+    },
+    {
+      "provider_id": "PRV-LHR-006",
+      "name": "Prof. Amjad Khan",
+      "business_name": "Khan Academy Tutoring",
+      "phone": "+92-325-6667788",
+      "service_categories": [
+        "TUTOR"
+      ],
+      "areas_served": [
+        "DHA Lahore",
+        "Gulberg",
+        "Model Town",
+        "Johar Town",
+        "Wapda Town"
+      ],
+      "city": "Lahore",
+      "coordinates": {
+        "lat": 31.515,
+        "lng": 74.345
+      },
+      "rating": 4.9,
+      "review_count": 567,
+      "response_rate": 0.97,
+      "active_bookings": 3,
+      "verification": {
+        "level": "KHIDMATGAR_VERIFIED",
+        "cnic_verified": true,
+        "background_checked": true
+      },
+      "pricing": {
+        "visit_fee_pkr": 0,
+        "hourly_rate_pkr": 2000,
+        "emergency_surcharge": 0.0,
+        "estimated_total_pkr": 4000
+      },
+      "availability": {
+        "accepts_emergency": false,
+        "emergency_hours": "3PM-9PM",
+        "available_today": true,
+        "next_slot": "Today 5PM"
+      },
+      "is_active": true,
+      "experience_years": 20,
+      "tags": [
+        "TUTOR",
+        "MATRIC",
+        "FSC",
+        "UNIVERSITY",
+        "ALL_SUBJECTS",
+        "EXPERIENCED"
+      ]
+    },
+    {
+      "provider_id": "PRV-RWP-001",
+      "name": "Shoaib Akhtar",
+      "business_name": "RWP Cooling Experts",
+      "phone": "+92-300-5556677",
+      "service_categories": [
+        "AC_TECHNICIAN"
+      ],
+      "areas_served": [
+        "Bahria Town Rwp",
+        "DHA Phase 2 Rwp",
+        "Satellite Town",
+        "Chaklala"
+      ],
+      "city": "Rawalpindi",
+      "coordinates": {
+        "lat": 33.6007,
+        "lng": 73.0679
+      },
+      "rating": 4.7,
+      "review_count": 134,
+      "response_rate": 0.89,
+      "active_bookings": 2,
+      "verification": {
+        "level": "KHIDMATGAR_VERIFIED",
+        "cnic_verified": true,
+        "background_checked": true
+      },
+      "pricing": {
+        "visit_fee_pkr": 450,
+        "hourly_rate_pkr": 1400,
+        "emergency_surcharge": 0.5,
+        "estimated_total_pkr": 1850
+      },
+      "availability": {
+        "accepts_emergency": true,
+        "emergency_hours": "7AM-11PM",
+        "available_today": true,
+        "next_slot": "Today 3PM"
+      },
+      "is_active": true,
+      "experience_years": 7,
+      "tags": [
+        "AC_TECHNICIAN",
+        "SPLIT_AC",
+        "INVERTER_AC",
+        "AFFORDABLE"
+      ]
+    },
+    {
+      "provider_id": "PRV-RWP-002",
+      "name": "Tariq Javed",
+      "business_name": "Rawalpindi Electric Co.",
+      "phone": "+92-321-7778899",
+      "service_categories": [
+        "ELECTRICIAN",
+        "APPLIANCE_REPAIR"
+      ],
+      "areas_served": [
+        "Saddar",
+        "Rawalpindi Cantt",
+        "Commercial Market",
+        "Committee Chowk"
+      ],
+      "city": "Rawalpindi",
+      "coordinates": {
+        "lat": 33.6139,
+        "lng": 73.0787
+      },
+      "rating": 4.5,
+      "review_count": 89,
+      "response_rate": 0.83,
+      "active_bookings": 1,
+      "verification": {
+        "level": "GOOGLE_VERIFIED",
+        "cnic_verified": true,
+        "background_checked": false
+      },
+      "pricing": {
+        "visit_fee_pkr": 300,
+        "hourly_rate_pkr": 950,
+        "emergency_surcharge": 0.75,
+        "estimated_total_pkr": 1250
+      },
+      "availability": {
+        "accepts_emergency": true,
+        "emergency_hours": "24/7",
+        "available_today": true,
+        "next_slot": "Today ASAP"
+      },
+      "is_active": true,
+      "experience_years": 11,
+      "tags": [
+        "ELECTRICIAN",
+        "INDUSTRIAL",
+        "RESIDENTIAL",
+        "EMERGENCY"
+      ]
+    },
+    {
+      "provider_id": "PRV-RWP-003",
+      "name": "Nasir Gondal",
+      "business_name": "Gondal Plumbing Rawalpindi",
+      "phone": "+92-335-9990011",
+      "service_categories": [
+        "PLUMBER"
+      ],
+      "areas_served": [
+        "Bahria Town Rwp",
+        "DHA Phase 2 Rwp",
+        "Sadar",
+        "Chakri Road"
+      ],
+      "city": "Rawalpindi",
+      "coordinates": {
+        "lat": 33.5951,
+        "lng": 73.0431
+      },
+      "rating": 4.4,
+      "review_count": 67,
+      "response_rate": 0.8,
+      "active_bookings": 0,
+      "verification": {
+        "level": "GOOGLE_VERIFIED",
+        "cnic_verified": true,
+        "background_checked": false
+      },
+      "pricing": {
+        "visit_fee_pkr": 300,
+        "hourly_rate_pkr": 850,
+        "emergency_surcharge": 0.5,
+        "estimated_total_pkr": 1150
+      },
+      "availability": {
+        "accepts_emergency": true,
+        "emergency_hours": "6AM-10PM",
+        "available_today": true,
+        "next_slot": "Today ASAP"
+      },
+      "is_active": true,
+      "experience_years": 6,
+      "tags": [
+        "PLUMBER",
+        "PIPE_BURST",
+        "AFFORDABLE",
+        "FAST"
+      ]
+    },
+    {
+      "provider_id": "PRV-PEW-001",
+      "name": "Hamid Khan",
+      "business_name": "Peshawari AC Services",
+      "phone": "+92-300-2223344",
+      "service_categories": [
+        "AC_TECHNICIAN",
+        "ELECTRICIAN"
+      ],
+      "areas_served": [
+        "Hayatabad",
+        "University Town",
+        "Saddar",
+        "Cantonment"
+      ],
+      "city": "Peshawar",
+      "coordinates": {
+        "lat": 34.0151,
+        "lng": 71.5249
+      },
+      "rating": 4.6,
+      "review_count": 78,
+      "response_rate": 0.87,
+      "active_bookings": 1,
+      "verification": {
+        "level": "KHIDMATGAR_VERIFIED",
+        "cnic_verified": true,
+        "background_checked": true
+      },
+      "pricing": {
+        "visit_fee_pkr": 400,
+        "hourly_rate_pkr": 1200,
+        "emergency_surcharge": 0.5,
+        "estimated_total_pkr": 1600
+      },
+      "availability": {
+        "accepts_emergency": true,
+        "emergency_hours": "8AM-10PM",
+        "available_today": true,
+        "next_slot": "Today 2PM"
+      },
+      "is_active": true,
+      "experience_years": 9,
+      "tags": [
+        "AC_TECHNICIAN",
+        "ELECTRICIAN",
+        "MULTI_SERVICE"
+      ]
+    },
+    {
+      "provider_id": "PRV-PEW-002",
+      "name": "Khaliq Afridi",
+      "business_name": "Afridi Plumbing Works",
+      "phone": "+92-315-4445566",
+      "service_categories": [
+        "PLUMBER",
+        "CARPENTER"
+      ],
+      "areas_served": [
+        "Hayatabad",
+        "University Town",
+        "Palosai"
+      ],
+      "city": "Peshawar",
+      "coordinates": {
+        "lat": 34.0061,
+        "lng": 71.4783
+      },
+      "rating": 4.5,
+      "review_count": 54,
+      "response_rate": 0.82,
+      "active_bookings": 0,
+      "verification": {
+        "level": "GOOGLE_VERIFIED",
+        "cnic_verified": true,
+        "background_checked": false
+      },
+      "pricing": {
+        "visit_fee_pkr": 300,
+        "hourly_rate_pkr": 900,
+        "emergency_surcharge": 0.5,
+        "estimated_total_pkr": 1200
+      },
+      "availability": {
+        "accepts_emergency": true,
+        "emergency_hours": "7AM-9PM",
+        "available_today": true,
+        "next_slot": "Today ASAP"
+      },
+      "is_active": true,
+      "experience_years": 7,
+      "tags": [
+        "PLUMBER",
+        "CARPENTER",
+        "AFFORDABLE"
+      ]
+    },
+    {
+      "provider_id": "PRV-QTA-001",
+      "name": "Iqbal Mengal",
+      "business_name": "Mengal Electric Services",
+      "phone": "+92-300-6667788",
+      "service_categories": [
+        "ELECTRICIAN",
+        "AC_TECHNICIAN"
+      ],
+      "areas_served": [
+        "Satellite Town Qta",
+        "Jinnah Town",
+        "Zarghoon Road"
+      ],
+      "city": "Quetta",
+      "coordinates": {
+        "lat": 30.1798,
+        "lng": 66.975
+      },
+      "rating": 4.5,
+      "review_count": 43,
+      "response_rate": 0.84,
+      "active_bookings": 1,
+      "verification": {
+        "level": "KHIDMATGAR_VERIFIED",
+        "cnic_verified": true,
+        "background_checked": true
+      },
+      "pricing": {
+        "visit_fee_pkr": 350,
+        "hourly_rate_pkr": 1000,
+        "emergency_surcharge": 0.5,
+        "estimated_total_pkr": 1350
+      },
+      "availability": {
+        "accepts_emergency": true,
+        "emergency_hours": "8AM-9PM",
+        "available_today": true,
+        "next_slot": "Today 3PM"
+      },
+      "is_active": true,
+      "experience_years": 6,
+      "tags": [
+        "ELECTRICIAN",
+        "AC_TECHNICIAN",
+        "MULTI_SERVICE"
+      ]
+    },
+    {
+      "provider_id": "PRV-HYD-001",
+      "name": "Rajesh Kumar",
+      "business_name": "Sindhi AC Works",
+      "phone": "+92-300-3334455",
+      "service_categories": [
+        "AC_TECHNICIAN",
+        "APPLIANCE_REPAIR"
+      ],
+      "areas_served": [
+        "Latifabad",
+        "Qasimabad",
+        "Hirabad",
+        "Cantt",
+        "City"
+      ],
+      "city": "Hyderabad",
+      "coordinates": {
+        "lat": 25.396,
+        "lng": 68.3578
+      },
+      "rating": 4.6,
+      "review_count": 89,
+      "response_rate": 0.88,
+      "active_bookings": 1,
+      "verification": {
+        "level": "KHIDMATGAR_VERIFIED",
+        "cnic_verified": true,
+        "background_checked": true
+      },
+      "pricing": {
+        "visit_fee_pkr": 400,
+        "hourly_rate_pkr": 1200,
+        "emergency_surcharge": 0.5,
+        "estimated_total_pkr": 1600
+      },
+      "availability": {
+        "accepts_emergency": true,
+        "emergency_hours": "7AM-10PM",
+        "available_today": true,
+        "next_slot": "Today 1PM"
+      },
+      "is_active": true,
+      "experience_years": 8,
+      "tags": [
+        "AC_TECHNICIAN",
+        "INVERTER_AC",
+        "APPLIANCE_REPAIR",
+        "FAST"
+      ]
+    },
+    {
+      "provider_id": "PRV-HYD-002",
+      "name": "Sajjad Soomro",
+      "business_name": "Soomro Electrical Hyderabad",
+      "phone": "+92-332-5556677",
+      "service_categories": [
+        "ELECTRICIAN"
+      ],
+      "areas_served": [
+        "Latifabad",
+        "Qasimabad",
+        "Cantt",
+        "Autobahn"
+      ],
+      "city": "Hyderabad",
+      "coordinates": {
+        "lat": 25.38,
+        "lng": 68.365
+      },
+      "rating": 4.4,
+      "review_count": 57,
+      "response_rate": 0.8,
+      "active_bookings": 0,
+      "verification": {
+        "level": "GOOGLE_VERIFIED",
+        "cnic_verified": true,
+        "background_checked": false
+      },
+      "pricing": {
+        "visit_fee_pkr": 250,
+        "hourly_rate_pkr": 900,
+        "emergency_surcharge": 0.5,
+        "estimated_total_pkr": 1150
+      },
+      "availability": {
+        "accepts_emergency": true,
+        "emergency_hours": "24/7",
+        "available_today": true,
+        "next_slot": "Today ASAP"
+      },
+      "is_active": true,
+      "experience_years": 5,
+      "tags": [
+        "ELECTRICIAN",
+        "AFFORDABLE",
+        "EMERGENCY"
+      ]
+    },
+    {
+      "provider_id": "PRV-HYD-003",
+      "name": "Irshad Kalhoro",
+      "business_name": "Kalhoro Plumbing Services",
+      "phone": "+92-348-7778899",
+      "service_categories": [
+        "PLUMBER"
+      ],
+      "areas_served": [
+        "Latifabad",
+        "Qasimabad",
+        "Hirabad",
+        "City",
+        "Cantt"
+      ],
+      "city": "Hyderabad",
+      "coordinates": {
+        "lat": 25.41,
+        "lng": 68.37
+      },
+      "rating": 4.5,
+      "review_count": 67,
+      "response_rate": 0.83,
+      "active_bookings": 0,
+      "verification": {
+        "level": "GOOGLE_VERIFIED",
+        "cnic_verified": true,
+        "background_checked": false
+      },
+      "pricing": {
+        "visit_fee_pkr": 300,
+        "hourly_rate_pkr": 850,
+        "emergency_surcharge": 0.5,
+        "estimated_total_pkr": 1150
+      },
+      "availability": {
+        "accepts_emergency": true,
+        "emergency_hours": "24/7",
+        "available_today": true,
+        "next_slot": "Today ASAP"
+      },
+      "is_active": true,
+      "experience_years": 7,
+      "tags": [
+        "PLUMBER",
+        "PIPE_BURST",
+        "AFFORDABLE",
+        "EMERGENCY"
+      ]
+    },
+    {
+      "provider_id": "PRV-MLT-001",
+      "name": "Nadeem Gillani",
+      "business_name": "Gillani AC & Fridge",
+      "phone": "+92-300-9991111",
+      "service_categories": [
+        "AC_TECHNICIAN",
+        "APPLIANCE_REPAIR"
+      ],
+      "areas_served": [
+        "Gulgasht",
+        "Gulshan Colony",
+        "Model Town Multan",
+        "Cantt Multan"
+      ],
+      "city": "Multan",
+      "coordinates": {
+        "lat": 30.1575,
+        "lng": 71.5249
+      },
+      "rating": 4.7,
+      "review_count": 112,
+      "response_rate": 0.9,
+      "active_bookings": 1,
+      "verification": {
+        "level": "KHIDMATGAR_VERIFIED",
+        "cnic_verified": true,
+        "background_checked": true
+      },
+      "pricing": {
+        "visit_fee_pkr": 400,
+        "hourly_rate_pkr": 1300,
+        "emergency_surcharge": 0.5,
+        "estimated_total_pkr": 1700
+      },
+      "availability": {
+        "accepts_emergency": true,
+        "emergency_hours": "7AM-11PM",
+        "available_today": true,
+        "next_slot": "Today 2PM"
+      },
+      "is_active": true,
+      "experience_years": 10,
+      "tags": [
+        "AC_TECHNICIAN",
+        "FRIDGE_REPAIR",
+        "APPLIANCE_REPAIR"
+      ]
+    },
+    {
+      "provider_id": "PRV-KHI-007",
+      "name": "Chef Iqbal Ahmed",
+      "business_name": "Iqbal Home Chef Services",
+      "phone": "+92-301-5554433",
+      "service_categories": [
+        "COOK"
+      ],
+      "areas_served": [
+        "DHA Phase 2",
+        "Clifton",
+        "PECHS",
+        "Bahadurabad"
+      ],
+      "city": "Karachi",
+      "coordinates": {
+        "lat": 24.835,
+        "lng": 67.065
+      },
+      "rating": 4.8,
+      "review_count": 156,
+      "response_rate": 0.92,
+      "active_bookings": 2,
+      "verification": {
+        "level": "KHIDMATGAR_VERIFIED",
+        "cnic_verified": true,
+        "background_checked": true
+      },
+      "pricing": {
+        "visit_fee_pkr": 500,
+        "hourly_rate_pkr": 0,
+        "emergency_surcharge": 0.0,
+        "estimated_total_pkr": 3000
+      },
+      "availability": {
+        "accepts_emergency": false,
+        "emergency_hours": "8AM-10PM",
+        "available_today": true,
+        "next_slot": "Today 5PM"
+      },
+      "is_active": true,
+      "experience_years": 12,
+      "tags": [
+        "COOK",
+        "DESI_FOOD",
+        "BIRYANI",
+        "EVENT_CATERING",
+        "HYGIENIC"
+      ]
+    },
+    {
+      "provider_id": "PRV-ISB-012",
+      "name": "Major Zafar (Retd)",
+      "business_name": "SecureHome Guards",
+      "phone": "+92-306-1112233",
+      "service_categories": [
+        "SECURITY_GUARD"
+      ],
+      "areas_served": [
+        "F-7",
+        "F-8",
+        "F-10",
+        "G-9",
+        "G-10",
+        "E-7"
+      ],
+      "city": "Islamabad",
+      "coordinates": {
+        "lat": 33.715,
+        "lng": 73.065
+      },
+      "rating": 4.9,
+      "review_count": 89,
+      "response_rate": 0.96,
+      "active_bookings": 5,
+      "verification": {
+        "level": "KHIDMATGAR_VERIFIED",
+        "cnic_verified": true,
+        "background_checked": true
+      },
+      "pricing": {
+        "visit_fee_pkr": 0,
+        "hourly_rate_pkr": 0,
+        "emergency_surcharge": 0.0,
+        "estimated_total_pkr": 30000
+      },
+      "availability": {
+        "accepts_emergency": true,
+        "emergency_hours": "24/7",
+        "available_today": true,
+        "next_slot": "Today ASAP"
+      },
+      "is_active": true,
+      "experience_years": 25,
+      "tags": [
+        "SECURITY_GUARD",
+        "EX_ARMY",
+        "TRAINED",
+        "ARMED",
+        "EVENT_SECURITY"
+      ]
+    },
+    {
+      "provider_id": "PRV-LHR-007",
+      "name": "Ghulam Mustafa",
+      "business_name": "GreenThumb Gardeners",
+      "phone": "+92-308-4445566",
+      "service_categories": [
+        "GARDENER"
+      ],
+      "areas_served": [
+        "DHA Lahore",
+        "Model Town",
+        "Gulberg",
+        "Cantt Lahore"
+      ],
+      "city": "Lahore",
+      "coordinates": {
+        "lat": 31.525,
+        "lng": 74.36
+      },
+      "rating": 4.6,
+      "review_count": 78,
+      "response_rate": 0.85,
+      "active_bookings": 2,
+      "verification": {
+        "level": "GOOGLE_VERIFIED",
+        "cnic_verified": true,
+        "background_checked": false
+      },
+      "pricing": {
+        "visit_fee_pkr": 300,
+        "hourly_rate_pkr": 700,
+        "emergency_surcharge": 0.0,
+        "estimated_total_pkr": 1500
+      },
+      "availability": {
+        "accepts_emergency": false,
+        "emergency_hours": "7AM-6PM",
+        "available_today": true,
+        "next_slot": "Today 8AM"
+      },
+      "is_active": true,
+      "experience_years": 10,
+      "tags": [
+        "GARDENER",
+        "LAWN",
+        "PLANT_CARE",
+        "TRIMMING",
+        "LANDSCAPING"
+      ]
+    },
+    {
+      "provider_id": "PRV-KHI-008",
+      "name": "Omar Farooq",
+      "business_name": "KhidmatGar Driver Service",
+      "phone": "+92-311-6667788",
+      "service_categories": [
+        "DRIVER"
+      ],
+      "areas_served": [
+        "DHA Phase 2",
+        "DHA Phase 4",
+        "Clifton",
+        "Gulshan-e-Iqbal",
+        "PECHS"
+      ],
+      "city": "Karachi",
+      "coordinates": {
+        "lat": 24.825,
+        "lng": 67.05
+      },
+      "rating": 4.7,
+      "review_count": 234,
+      "response_rate": 0.94,
+      "active_bookings": 1,
+      "verification": {
+        "level": "KHIDMATGAR_VERIFIED",
+        "cnic_verified": true,
+        "background_checked": true
+      },
+      "pricing": {
+        "visit_fee_pkr": 0,
+        "hourly_rate_pkr": 500,
+        "emergency_surcharge": 0.25,
+        "estimated_total_pkr": 2000
+      },
+      "availability": {
+        "accepts_emergency": true,
+        "emergency_hours": "24/7",
+        "available_today": true,
+        "next_slot": "Today ASAP"
+      },
+      "is_active": true,
+      "experience_years": 8,
+      "tags": [
+        "DRIVER",
+        "PERSONAL_DRIVER",
+        "MONTHLY_CONTRACT",
+        "TRUSTWORTHY",
+        "LICENSED"
+      ]
+    }
+   
+  ]
+}

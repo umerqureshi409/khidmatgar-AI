@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KhidmatGar Antigravity - Web Demo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=Outfit:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #0A0A0A;
+            background-image: radial-gradient(circle at 50% -20%, rgba(57, 255, 20, 0.15) 0%, rgba(10, 10, 10, 1) 60%);
+            color: #FFFFFF;
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        .location-badge {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .primary-neon { color: #39FF14; }
+        .bg-neon { background-color: #39FF14; }
+        .border-neon { border-color: #39FF14; }
+
+        .agent-pill {
+            background: rgba(57, 255, 20, 0.1);
+            border: 1px solid rgba(57, 255, 20, 0.3);
+            color: #39FF14;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .chat-bubble-user {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px 20px 4px 20px;
+            padding: 16px;
+            max-width: 80%;
+            align-self: flex-end;
+            margin-bottom: 16px;
+        }
+
+        .chat-bubble-bot {
+            background: rgba(57, 255, 20, 0.05);
+            border: 1px solid rgba(57, 255, 20, 0.2);
+            border-radius: 20px 20px 20px 4px;
+            padding: 16px;
+            max-width: 80%;
+            align-self: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .json-viewer {
+            font-family: monospace;
+            background: #111;
+            padding: 16px;
+            border-radius: 12px;
+            overflow-x: auto;
+            color: #a3a3a3;
+            font-size: 0.85rem;
+        }
+
+        .json-key { color: #39FF14; }
+        .json-string { color: #facc15; }
+
+        /* Loader */
+        .loader {
+            border: 3px solid rgba(57, 255, 20, 0.1);
+            border-top: 3px solid #39FF14;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 4px; }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <div class="max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-8 h-[calc(100vh-4rem)]">
+        
+        <!-- Left Column: Chat & Interaction -->
+        <div class="glass-panel flex flex-col h-full overflow-hidden">
+            <!-- Header -->
+            <div class="p-6 border-b border-white/5 flex items-center justify-between">
+                <div>
+                    <h1 class="text-2xl font-extrabold flex items-center gap-3">
+                        <span class="w-10 h-10 rounded-full bg-neon/10 border border-neon/50 flex items-center justify-center primary-neon">K</span>
+                        KhidmatGar <span class="text-white/40 text-sm font-normal ml-2">Web Demo</span>
+                    </h1>
+                </div>
+                <div id="location-badge" class="location-badge text-white/50">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    <span id="location-text">Detecting...</span>
+                </div>
+            </div>
+
+            <!-- Chat Area -->
+            <div id="chat-container" class="flex-1 p-6 overflow-y-auto flex flex-col">
+                <div class="chat-bubble-bot">
+                    <p class="font-bold text-white mb-1 flex items-center gap-2">
+                        KhidmatGar Agent <span class="agent-pill">ZARA</span>
+                    </p>
+                    <p class="text-white/80 leading-relaxed">Hello! I am your AI service orchestrator. Do you need an AC Technician, Plumber, Electrician, or someone else today?</p>
+                </div>
+            </div>
+
+            <!-- Input Area -->
+            <div class="p-6 border-t border-white/5 bg-white/5">
+                <form id="chat-form" class="flex gap-4">
+                    <input type="text" id="user-input" class="flex-1 bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-neon transition-colors placeholder-white/30" placeholder="E.g., I need an AC technician urgently in F-7..." autocomplete="off">
+                    <button type="submit" id="send-btn" class="bg-neon text-black font-bold px-6 py-3 rounded-xl hover:bg-green-400 transition-colors flex items-center justify-center min-w-[100px]">
+                        <span>Send</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Right Column: Antigravity Trace -->
+        <div class="glass-panel flex flex-col h-full overflow-hidden">
+            <div class="p-6 border-b border-white/5 flex items-center gap-3">
+                <div class="w-2 h-2 rounded-full bg-neon animate-pulse"></div>
+                <h2 class="text-lg font-bold font-['Outfit'] tracking-wider">LIVE ANTIGRAVITY TRACE</h2>
+            </div>
+            
+            <div class="flex-1 p-6 overflow-y-auto">
+                <div id="trace-container" class="space-y-6">
+                    <div class="text-center text-white/30 mt-10 text-sm">
+                        Waiting for orchestration to begin...
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const chatForm = document.getElementById('chat-form');
+        const userInput = document.getElementById('user-input');
+        const chatContainer = document.getElementById('chat-container');
+        const traceContainer = document.getElementById('trace-container');
+        const sendBtn = document.getElementById('send-btn');
+        const locText = document.getElementById('location-text');
+        const locBadge = document.getElementById('location-badge');
+        
+        let sessionId = null;
+        let clientLat = null;
+        let clientLng = null;
+
+        // Fetch location on load
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (pos) => {
+                    clientLat = pos.coords.latitude;
+                    clientLng = pos.coords.longitude;
+                    locText.innerText = `${clientLat.toFixed(4)}, ${clientLng.toFixed(4)}`;
+                    locBadge.classList.add('text-neon', 'border-neon/50');
+                    locBadge.classList.remove('text-white/50');
+                },
+                (err) => {
+                    locText.innerText = "Location Blocked";
+                }
+            );
+        } else {
+            locText.innerText = "No GPS";
+        }
+
+        function addChatBubble(text, sender, agentName = null) {
+            const div = document.createElement('div');
+            if (sender === 'user') {
+                div.className = 'chat-bubble-user';
+                div.innerHTML = `<p class="text-white">${text}</p>`;
+            } else {
+                div.className = 'chat-bubble-bot';
+                let header = `<p class="font-bold text-white mb-2 flex items-center gap-2">KhidmatGar ${agentName ? `<span class="agent-pill">${agentName}</span>` : ''}</p>`;
+                
+                // Format text if it contains providers
+                let formattedText = text.replace(/\n/g, '<br>');
+                div.innerHTML = header + `<div class="text-white/80 leading-relaxed">${formattedText}</div>`;
+            }
+            chatContainer.appendChild(div);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        function syntaxHighlight(json) {
+            if (typeof json != 'string') {
+                json = JSON.stringify(json, undefined, 2);
+            }
+            json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+                let cls = 'text-blue-400';
+                if (/^"/.test(match)) {
+                    if (/:$/.test(match)) {
+                        cls = 'json-key';
+                    } else {
+                        cls = 'json-string';
+                    }
+                } else if (/true|false/.test(match)) {
+                    cls = 'text-green-400';
+                } else if (/null/.test(match)) {
+                    cls = 'text-red-400';
+                }
+                return '<span class="' + cls + '">' + match + '</span>';
+            });
+        }
+
+        function updateTrace(trace) {
+            if (!trace) return;
+            
+            traceContainer.innerHTML = '';
+            
+            // Task Plan
+            const taskPlan = trace.task_plan || {};
+            const tpDiv = document.createElement('div');
+            tpDiv.className = 'mb-6';
+            tpDiv.innerHTML = `
+                <h3 class="text-white/50 text-xs font-bold uppercase tracking-widest mb-2">Task Plan Status</h3>
+                <div class="bg-white/5 border border-white/10 rounded-lg p-4">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="font-bold text-white">${taskPlan.primary_goal || 'Unknown Goal'}</span>
+                        <span class="text-xs px-2 py-1 rounded bg-neon/20 text-neon">${taskPlan.status || 'PENDING'}</span>
+                    </div>
+                    <div class="text-sm text-white/60">Sub-goals: ${taskPlan.sub_goals?.join(', ')}</div>
+                </div>
+            `;
+            traceContainer.appendChild(tpDiv);
+
+            // Agent Observations
+            const obs = trace.agent_observations || {};
+            const obsDiv = document.createElement('div');
+            obsDiv.className = 'mb-6';
+            let obsHtml = `<h3 class="text-white/50 text-xs font-bold uppercase tracking-widest mb-2">Agent Observations</h3>`;
+            for (const [agent, notes] of Object.entries(obs)) {
+                if (notes) {
+                    obsHtml += `
+                        <div class="bg-white/5 border-l-2 border-neon p-3 mb-2 rounded-r-lg">
+                            <span class="text-neon text-xs font-bold">${agent}</span>
+                            <p class="text-sm text-white/80 mt-1">${notes}</p>
+                        </div>
+                    `;
+                }
+            }
+            obsDiv.innerHTML = obsHtml;
+            traceContainer.appendChild(obsDiv);
+
+            // Raw JSON
+            const rawDiv = document.createElement('div');
+            rawDiv.innerHTML = `
+                <h3 class="text-white/50 text-xs font-bold uppercase tracking-widest mb-2">Raw JSON Output</h3>
+                <pre class="json-viewer">${syntaxHighlight(trace)}</pre>
+            `;
+            traceContainer.appendChild(rawDiv);
+        }
+
+        chatForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const message = userInput.value.trim();
+            if (!message) return;
+
+            addChatBubble(message, 'user');
+            userInput.value = '';
+            
+            sendBtn.innerHTML = '<div class="loader border-black/20 border-t-black"></div>';
+            sendBtn.disabled = true;
+
+            // Optional: check if they typed "book" to simulate button click
+            let finalMessage = message;
+            if (message.toLowerCase().startsWith('book ')) {
+                // e.g. "book PRV-123"
+                finalMessage = "SYSTEM_BOOK_PROVIDER:" + message.substring(5).trim();
+            }
+
+            try {
+                const response = await fetch('/v1/workflows/khidmatgar-master/run', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        inputs: { 
+                            user_message: finalMessage, 
+                            platform: 'web',
+                            client_lat: clientLat,
+                            client_lng: clientLng
+                        },
+                        session_id: sessionId
+                    })
+                });
+
+                const data = await response.json();
+                sessionId = data.session_id || sessionId;
+
+                // Check if providers were found to show interactive buttons
+                let botMessage = data.user_message;
+                
+                if (data.providers && data.providers.length > 0 && data.current_agent !== 'MUKHTAR' && data.current_agent !== 'HIFAZAT' && !data.booking_data) {
+                    botMessage += "<br><br><div class='flex gap-2 mt-2 flex-wrap'>";
+                    data.providers.forEach(p => {
+                        botMessage += `<button onclick="submitBooking('${p.provider_id}')" class="bg-white/10 hover:bg-white/20 border border-white/20 px-3 py-2 rounded-lg text-sm text-white transition-colors">Book ${p.business_name || p.name}</button>`;
+                    });
+                    botMessage += "</div>";
+                }
+
+                addChatBubble(botMessage, 'bot', data.current_agent);
+                updateTrace(data.antigravity_trace);
+
+            } catch (err) {
+                addChatBubble("Connection Error: Make sure the FastAPI backend is running.", 'bot', 'SYSTEM');
+            } finally {
+                sendBtn.innerHTML = '<span>Send</span>';
+                sendBtn.disabled = false;
+            }
+        });
+
+        // Global function for injected buttons
+        window.submitBooking = function(providerId) {
+            userInput.value = "book " + providerId;
+            chatForm.dispatchEvent(new Event('submit'));
+        };
+    </script>
+</body>
+</html>
