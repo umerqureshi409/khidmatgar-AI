@@ -30,7 +30,7 @@
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
 │                    USER LAYER (Mobile App)                          │
-│              Flutter App with Speech Recognition                     │
+│              Flutter App with Speech Recognition                    │
 │          Supports: Urdu, Roman Urdu, English (Real-time)            │
 └────────────────────────────┬────────────────────────────────────────┘
                              │ HTTP/REST
@@ -38,9 +38,9 @@
 ┌─────────────────────────────────────────────────────────────────────┐
 │              ORCHESTRATION LAYER (Google Antigravity)               │
 │         Session Management | Workflow Coordination | Trace Logs     │
-└────────────────┬──────────────────────────────────┬──────────────────┘
+└────────────────┬──────────────────────────────────┬─────────────────┘
                  │                                  │
-        ┌────────▼──────────┐            ┌─────────▼─────────┐
+        ┌────────▼───────────┐            ┌─────────▼─────────┐
         │   Agent Pipeline   │            │  Database Layer   │
         │                    │            │                   │
         │  1. ZARA: Intent   │────────────│  Firebase         │
