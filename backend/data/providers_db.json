@@ -2671,7 +2671,37 @@
         "TRUSTWORTHY",
         "LICENSED"
       ]
+    },
+    {
+      "provider_id": "PRV-ASAD-3261",
+      "name": "Asad",
+      "phone": "+923163813090",
+      "company": "Asad Electronics",
+      "service_categories": [
+        "AC_TECHNICIAN",
+        "ELECTRICIAN",
+        "APPLIANCE_REPAIR"
+      ],
+      "coordinates": {
+        "lat": 25.3594514,
+        "lng": 68.2733237
+      },
+      "areas_served": [],
+      "city": "Islamabad",
+      "rating": 5.0,
+      "review_count": 3,
+      "response_rate": 1.0,
+      "verification": {
+        "level": "KHIDMATGAR_VERIFIED",
+        "status": "VERIFIED"
+      },
+      "availability": {
+        "available_today": true,
+        "accepts_emergency": true,
+        "next_slot": "Today ASAP"
+      },
+      "registered_at": "2026-05-20T18:21:01.739270",
+      "_is_live_registered": true
     }
-   
   ]
 }
