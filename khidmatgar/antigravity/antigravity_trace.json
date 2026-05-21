@@ -1,0 +1,56 @@
+{
+  "session_id": "sess-20260520-XXXX",
+  "timestamp": "2026-05-20T15:30:00+05:00",
+  "user_input": "Mujhe kal subah AC wala chahiye G-11 mein",
+  "workplan": {
+    "steps": ["ZARA intent parse", "KHOJI provider search", "Weather fetch", "Provider scoring", "MUKHTAR booking", "YAKEEN scheduling"],
+    "estimated_duration_ms": 8000
+  },
+  "task_plan": {
+    "primary_goal": "Book AC technician in G-11 for tomorrow morning",
+    "sub_goals": ["Extract intent", "Find providers", "Rank by score", "Confirm booking", "Schedule reminder"]
+  },
+  "agent_observations": {
+    "ZARA": "Detected Roman Urdu. Service: AC_TECHNICIAN. Location: G-11 (confidence 0.97). Time: TOMORROW_MORNING. Urgency: MEDIUM (score 5).",
+    "KHOJI": "Found 12 providers within 5km via Google Maps. 7 matched AC_TECHNICIAN. Top scorer: Ali AC Services (score 87/100). Weather: 38C, CLEAR.",
+    "MUKHTAR": "Booked Ali AC Services for tomorrow 10AM. Booking ID: KG-20260520-AB3X. Provider notified. User confirmation sent.",
+    "YAKEEN": "Reminder scheduled for tomorrow 9AM. Follow-up scheduled for tomorrow 12PM."
+  },
+  "reasoning": {
+    "provider_selection": "Ali AC Services ranked #1: distance 1.8km (score 25/30), rating 4.8 (score 24/25), available tomorrow (score 10/20), response rate 94% (score 14/15), verified (score 10/10). Total: 83/100.",
+    "urgency_assessment": "User said 'kal subah' — medium urgency. No emergency keywords. Normal workflow applied.",
+    "language_handling": "Roman Urdu detected. All responses generated in Roman Urdu to match user preference."
+  },
+  "decisions": [
+    "Selected MUKHTAR autonomous booking (no user confirmation required for medium urgency)",
+    "Applied TOMORROW_MORNING slot (08:00-12:00) based on 'kal subah'",
+    "Excluded provider Bilal AC Services (rating 2.9 — below threshold)"
+  ],
+  "tool_calls": [
+    {"tool": "google_maps_geocode", "input": "G-11, Islamabad", "output": "33.6844, 73.0479", "latency_ms": 340},
+    {"tool": "google_maps_places_search", "input": "AC repair G-11 Islamabad 5000m", "output": "12 results", "latency_ms": 890},
+    {"tool": "get_weather_context", "input": "Islamabad", "output": "38C CLEAR", "latency_ms": 210},
+    {"tool": "check_provider_availability", "input": "PRV-001 2026-05-21T10:00:00", "output": "AVAILABLE", "latency_ms": 180},
+    {"tool": "create_booking_record", "input": "KG-20260520-AB3X", "output": "SUCCESS", "latency_ms": 420},
+    {"tool": "log_to_sheets", "input": "audit row", "output": "LOGGED", "latency_ms": 150}
+  ],
+  "action_execution": {
+    "booking_created": "KG-20260520-AB3X",
+    "provider_notified": true,
+    "user_confirmed": true,
+    "reminder_scheduled": "2026-05-21T09:00:00+05:00",
+    "audit_logged": true
+  },
+  "error_recovery": {
+    "errors_encountered": 0,
+    "hifazat_triggered": false
+  },
+  "final_outcome": {
+    "status": "SUCCESS",
+    "booking_id": "KG-20260520-AB3X",
+    "provider": "Ali AC Services",
+    "slot": "Tomorrow 10:00 AM - 12:00 PM",
+    "estimated_cost_pkr": 2000,
+    "total_latency_ms": 4230
+  }
+}

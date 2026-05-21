@@ -1,0 +1,129 @@
+name: KhidmatGar Service Orchestration
+version: "1.0"
+description: End-to-end service request to booking pipeline with agentic reasoning
+
+triggers:
+  - type: user_message
+    input_variable: user_message
+
+workflow:
+  - step: initialize_session
+    action: generate_uuid
+    output: session_id
+    log: "New session started"
+
+  - step: intent_parsing
+    agent: ZARA
+    input: 
+      user_message: "{{user_message}}"
+      session_id: "{{session_id}}"
+    output: intent_data
+    on_error: route_to_hifazat
+    timeout_ms: 5000
+    log: "ZARA parsing intent..."
+
+  - step: check_clarification_needed
+    condition: "{{intent_data.clarification_needed}} == true"
+    if_true:
+      action: return_to_user
+      message: "{{intent_data.clarification_question}}"
+      await_user_response: true
+      resume_at: intent_parsing
+    if_false:
+      continue: provider_discovery
+
+  - step: provider_discovery
+    agent: KHOJI
+    input:
+      intent: "{{intent_data}}"
+      session_id: "{{session_id}}"
+    output: discovery_data
+    parallel_with: fetch_weather
+    on_error: route_to_hifazat
+    timeout_ms: 10000
+    log: "KHOJI searching for providers..."
+
+  - step: fetch_weather
+    tool: get_weather_context
+    input:
+      city: "{{intent_data.location.city}}"
+    output: weather_data
+    log: "Fetching live weather context..."
+
+  - step: check_providers_found
+    condition: "{{discovery_data.providers | length}} == 0"
+    if_true:
+      route_to: hifazat
+      failure_type: NO_PROVIDERS_FOUND
+    if_false:
+      continue: present_recommendation
+
+  - step: present_recommendation
+    action: format_recommendation_for_user
+    input:
+      providers: "{{discovery_data.providers}}"
+      recommendation: "{{discovery_data.recommendation}}"
+      weather: "{{weather_data}}"
+      language: "{{intent_data.detected_language}}"
+    output: recommendation_message
+    log: "Presenting recommendation to user..."
+
+  - step: await_user_confirmation
+    action: wait_for_user_input
+    message: "{{recommendation_message}}"
+    timeout_seconds: 120
+    on_timeout: 
+      action: auto_book_if_high_urgency
+      condition: "{{intent_data.urgency.score}} >= 8"
+    output: user_confirmation
+
+  - step: booking_execution
+    agent: MUKHTAR
+    input:
+      intent: "{{intent_data}}"
+      discovery: "{{discovery_data}}"
+      confirmation: "{{user_confirmation}}"
+      session_id: "{{session_id}}"
+    output: booking_data
+    on_error: route_to_hifazat
+    timeout_ms: 8000
+    log: "MUKHTAR executing booking..."
+
+  - step: schedule_followup
+    agent: YAKEEN
+    input:
+      booking: "{{booking_data}}"
+      session_id: "{{session_id}}"
+    output: followup_data
+    async: true
+    log: "YAKEEN scheduling follow-ups..."
+
+  - step: compile_trace
+    action: compile_agent_trace
+    input:
+      session_id: "{{session_id}}"
+      zara: "{{intent_data}}"
+      khoji: "{{discovery_data}}"
+      mukhtar: "{{booking_data}}"
+      yakeen: "{{followup_data}}"
+      weather: "{{weather_data}}"
+    output: full_trace
+    log: "Compiling full agent trace..."
+
+  - step: final_response
+    action: return_to_user
+    input:
+      booking: "{{booking_data}}"
+      trace: "{{full_trace}}"
+      language: "{{intent_data.detected_language}}"
+    log: "Returning confirmed booking to user"
+
+error_routes:
+  hifazat:
+    agent: HIFAZAT
+    input:
+      failure_context: "{{error}}"
+      original_request: "{{intent_data}}"
+      session_id: "{{session_id}}"
+    on_success: resume_workflow
+    on_failure: return_graceful_error
