@@ -1390,9 +1390,9 @@ flutter build apk --release
 ```
 
 ### Live Services
-- **Backend API**: https://khidmatgar-backend.onrender.com
-- **API Docs**: https://khidmatgar-backend.onrender.com/docs
-- **Health Check**: https://khidmatgar-backend.onrender.com/health
+- **Backend API**: https://khidmatgar-backend-fgeyfwf2a3hqcneh.southeastasia-01.azurewebsites.net
+- **API Docs**: https://khidmatgar-backend-fgeyfwf2a3hqcneh.southeastasia-01.azurewebsites.net/docs
+- **Health Check**: https://khidmatgar-backend-fgeyfwf2a3hqcneh.southeastasia-01.azurewebsites.net/health
 
 ---
 
