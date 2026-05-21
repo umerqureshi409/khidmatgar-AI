@@ -1,0 +1,18 @@
+{
+  "booking_id": "KG-20260520-AB3X",
+  "session_id": "session-uuid",
+  "status": "CONFIRMED",
+  "provider_id": "PRV-001",
+  "provider_name": "Muhammad Ali",
+  "user_phone_masked": "+92-3XX-XXXXXXX",
+  "user_location": "G-11 Markaz, Islamabad",
+  "user_coordinates": { "lat": 33.69, "lng": 73.02 },
+  "service_type": "AC_TECHNICIAN",
+  "urgency_score": 6,
+  "slot_start": "2026-05-21T10:00:00+05:00",
+  "slot_end": "2026-05-21T12:00:00+05:00",
+  "estimated_cost_pkr": 2000,
+  "agent_trace": {},
+  "created_at": "2026-05-20T15:30:00+05:00",
+  "reminder_scheduled": "2026-05-21T09:00:00+05:00"
+}
