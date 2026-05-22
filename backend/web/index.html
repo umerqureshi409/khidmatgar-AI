@@ -3,343 +3,1917 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KhidmatGar Antigravity - Web Demo</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=Outfit:wght@400;500&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>KhidmatGar — AI Service Orchestrator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <style>
+        :root {
+            --neon: #39FF14;
+            --neon-dim: rgba(57,255,20,0.15);
+            --neon-border: rgba(57,255,20,0.3);
+            --bg: #080808;
+            --surface: rgba(255,255,255,0.03);
+            --surface-hover: rgba(255,255,255,0.06);
+            --border: rgba(255,255,255,0.07);
+            --text: #e8e8e8;
+            --text-dim: rgba(232,232,232,0.45);
+            --red: #ff4444;
+            --yellow: #ffd700;
+            --blue: #4fc3f7;
+            --gold: #ffd700;
+            --purple: #9C27B0;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html, body { height: 100%; overflow: hidden; }
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #0A0A0A;
-            background-image: radial-gradient(circle at 50% -20%, rgba(57, 255, 20, 0.15) 0%, rgba(10, 10, 10, 1) 60%);
-            color: #FFFFFF;
-            min-height: 100vh;
-            margin: 0;
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
             display: flex;
             flex-direction: column;
-            overflow-x: hidden;
         }
 
-        .location-badge {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 4px 12px;
-            border-radius: 12px;
-            font-size: 0.8rem;
+        /* ── TOP BAR ── */
+        #topbar {
             display: flex;
             align-items: center;
-            gap: 6px;
-        }
-
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.03);
+            justify-content: space-between;
+            padding: 10px 20px;
+            border-bottom: 1px solid var(--border);
+            background: rgba(8,8,8,0.95);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 24px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            flex-shrink: 0;
+            z-index: 100;
+        }
+        .logo {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 1.25rem;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .logo-icon {
+            width: 32px; height: 32px;
+            background: var(--neon-dim);
+            border: 1px solid var(--neon-border);
+            border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--neon);
+            font-size: 0.9rem;
+        }
+        .logo-text span { color: var(--neon); }
+        .topbar-right { display: flex; align-items: center; gap: 12px; }
+        .status-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: var(--neon);
+            box-shadow: 0 0 8px var(--neon);
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+        @keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.8)} }
+        .backend-status {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            display: flex; align-items: center; gap: 6px;
+        }
+        .loc-pill {
+            font-size: 0.72rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 4px 10px;
+            color: var(--text-dim);
+            display: flex; align-items: center; gap: 5px;
         }
 
-        .primary-neon { color: #39FF14; }
-        .bg-neon { background-color: #39FF14; }
-        .border-neon { border-color: #39FF14; }
+        /* ── MAIN LAYOUT ── */
+        #main {
+            display: grid;
+            grid-template-columns: 380px 1fr 320px;
+            flex: 1;
+            overflow: hidden;
+            gap: 0;
+        }
 
-        .agent-pill {
-            background: rgba(57, 255, 20, 0.1);
-            border: 1px solid rgba(57, 255, 20, 0.3);
-            color: #39FF14;
-            padding: 4px 12px;
+        /* ── PANELS ── */
+        .panel {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border-right: 1px solid var(--border);
+        }
+        .panel:last-child { border-right: none; }
+        .panel-header {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border);
+            font-family: 'Syne', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            display: flex; align-items: center; gap: 8px;
+            flex-shrink: 0;
+        }
+        .panel-header .badge {
+            background: var(--neon-dim);
+            color: var(--neon);
+            border: 1px solid var(--neon-border);
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 0.65rem;
+        }
+
+        /* ── CHAT PANEL ── */
+        #chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .msg {
+            max-width: 90%;
+            animation: fadeUp 0.3s ease forwards;
+        }
+        .msg.user { align-self: flex-end; }
+        .msg.bot { align-self: flex-start; width: 100%; max-width: 100%; }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(8px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .msg-bubble {
+            padding: 12px 14px;
+            border-radius: 16px;
+            font-size: 0.875rem;
+            line-height: 1.55;
+        }
+        .msg.user .msg-bubble {
+            background: rgba(57,255,20,0.12);
+            border: 1px solid var(--neon-border);
+            border-radius: 16px 16px 4px 16px;
+        }
+        .msg.bot .msg-bubble {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px 16px 16px 4px;
+        }
+        .agent-label {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            margin-bottom: 5px;
+            display: flex; align-items: center; gap: 5px;
+        }
+        .typing-indicator {
+            display: flex; gap: 4px; align-items: center; padding: 8px 0;
+        }
+        .typing-indicator span {
+            width: 6px; height: 6px;
+            background: var(--neon);
+            border-radius: 50%;
+            animation: bounce 1.2s ease-in-out infinite;
+        }
+        .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+        .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes bounce { 0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-6px)} }
+
+        /* Provider Cards */
+        .provider-cards { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+        .provider-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--border);
             border-radius: 12px;
+            padding: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .provider-card:hover { border-color: var(--neon-border); background: var(--surface-hover); }
+        .provider-card.top { border-color: var(--neon-border); }
+        .provider-card.top::before {
+            content: "AI PICK";
+            position: absolute;
+            top: -1px; right: 12px;
+            background: var(--neon);
+            color: #000;
+            font-family: 'Syne', sans-serif;
+            font-size: 0.6rem;
+            font-weight: 800;
+            padding: 2px 8px;
+            border-radius: 0 0 6px 6px;
+        }
+        .pcard-name { font-weight: 600; font-size: 0.85rem; margin-bottom: 3px; }
+        .pcard-meta { font-size: 0.75rem; color: var(--text-dim); display: flex; gap: 10px; flex-wrap: wrap; }
+        .pcard-meta span { display: flex; align-items: center; gap: 3px; }
+        .pcard-price { color: var(--neon); font-weight: 600; font-size: 0.85rem; }
+        .pcard-book-btn {
+            margin-top: 10px;
+            width: 100%;
+            background: var(--neon);
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            padding: 8px;
+            font-family: 'Syne', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            letter-spacing: 0.05em;
+        }
+        .pcard-book-btn:hover { opacity: 0.85; }
+        .pcard-book-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+        /* ── BID CARD ── */
+        .bid-card {
+            background: rgba(57,255,20,0.05);
+            border: 1.5px solid var(--neon-border);
+            border-radius: 12px;
+            padding: 14px;
+            margin-top: 4px;
+            animation: bidPulse 0.5s ease;
+        }
+        @keyframes bidPulse { from{transform:scale(0.97);opacity:0} to{transform:scale(1);opacity:1} }
+        .bid-header { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+        .bid-badge {
+            background: var(--neon-dim);
+            border: 1px solid var(--neon-border);
+            color: var(--neon);
+            font-family: 'Syne', sans-serif;
+            font-size: 0.6rem;
+            font-weight: 800;
+            padding: 2px 8px;
+            border-radius: 4px;
+            letter-spacing: 0.1em;
+        }
+        .bid-provider { font-weight: 700; font-size: 0.9rem; }
+        .bid-details {
+            display: flex; gap: 12px; margin-bottom: 12px;
+            background: rgba(0,0,0,0.25);
+            border-radius: 8px;
+            padding: 10px 12px;
+        }
+        .bid-stat { flex: 1; text-align: center; }
+        .bid-stat-val { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1rem; color: var(--neon); }
+        .bid-stat-lbl { font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px; }
+        .bid-actions { display: flex; gap: 8px; }
+        .btn-confirm {
+            flex: 2;
+            background: var(--neon);
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            padding: 10px;
+            font-family: 'Syne', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            letter-spacing: 0.05em;
+        }
+        .btn-confirm:hover { opacity: 0.85; }
+        .btn-confirm:disabled { opacity: 0.4; cursor: not-allowed; }
+        .btn-decline {
+            flex: 1;
+            background: transparent;
+            color: var(--red);
+            border: 1px solid var(--red);
+            border-radius: 8px;
+            padding: 10px;
+            font-family: 'Syne', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-decline:hover { background: rgba(255,68,68,0.1); }
+
+        /* ── BOOKING RECEIPT CARD ── */
+        .booking-receipt {
+            border: 1.5px solid rgba(57,255,20,0.4);
+            border-radius: 14px;
+            overflow: hidden;
+            margin-top: 4px;
+            box-shadow: 0 0 20px rgba(57,255,20,0.07);
+        }
+        .receipt-header {
+            background: linear-gradient(135deg, rgba(57,255,20,0.15), rgba(57,255,20,0.06));
+            padding: 14px 16px;
+            display: flex; align-items: center; gap: 12px;
+            border-bottom: 1px solid rgba(57,255,20,0.2);
+        }
+        .receipt-icon {
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            background: rgba(57,255,20,0.15);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+        .receipt-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.95rem; }
+        .receipt-subtitle { font-size: 0.72rem; color: var(--neon); margin-top: 2px; }
+        .receipt-id-banner {
+            background: rgba(0,0,0,0.35);
+            padding: 7px;
+            text-align: center;
+            font-family: 'Syne', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--neon);
+            letter-spacing: 0.12em;
+            border-bottom: 1px solid rgba(57,255,20,0.15);
+        }
+        .receipt-body { padding: 14px 16px; display: flex; flex-direction: column; gap: 12px; }
+        .receipt-section-label {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+        .receipt-rows {
+            background: rgba(0,0,0,0.25);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .receipt-row {
+            display: flex; align-items: center; gap: 10px;
+            padding: 9px 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
             font-size: 0.8rem;
+        }
+        .receipt-row:last-child { border-bottom: none; }
+        .receipt-row-icon { font-size: 0.85rem; width: 16px; text-align: center; flex-shrink: 0; color: var(--text-dim); }
+        .receipt-row-label { color: var(--text-dim); flex-shrink: 0; min-width: 65px; }
+        .receipt-row-value { flex: 1; text-align: right; font-weight: 600; font-size: 0.82rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .receipt-price-box {
+            background: rgba(255,215,0,0.07);
+            border: 1px solid rgba(255,215,0,0.25);
+            border-radius: 10px;
+            padding: 12px;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .price-amount {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--gold);
+        }
+        .price-method {
+            margin-left: auto;
+            background: rgba(0,0,0,0.3);
+            border-radius: 6px;
+            padding: 3px 8px;
+            font-size: 0.68rem;
+            color: var(--text-dim);
             font-weight: 600;
         }
+        .receipt-actions {
+            padding: 12px 16px;
+            display: flex; gap: 8px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        .btn-track {
+            flex: 2;
+            background: rgba(57,255,20,1);
+            color: #000;
+            border: none;
+            border-radius: 10px;
+            padding: 11px;
+            font-family: 'Syne', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            letter-spacing: 0.04em;
+        }
+        .btn-track:hover { opacity: 0.85; }
+        .btn-cancel-booking {
+            flex: 1;
+            background: transparent;
+            color: var(--red);
+            border: 1px solid var(--red);
+            border-radius: 10px;
+            padding: 11px;
+            font-family: 'Syne', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-cancel-booking:hover { background: rgba(255,68,68,0.1); }
 
-        .chat-bubble-user {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px 20px 4px 20px;
-            padding: 16px;
-            max-width: 80%;
-            align-self: flex-end;
-            margin-bottom: 16px;
+        /* ── TRACKING PANEL ── */
+        .tracking-panel {
+            border: 1px solid rgba(57,255,20,0.3);
+            border-radius: 14px;
+            overflow: hidden;
+            margin-top: 4px;
+        }
+        .tracking-header {
+            background: rgba(57,255,20,0.08);
+            padding: 12px 14px;
+            display: flex; align-items: center; gap: 10px;
+            border-bottom: 1px solid rgba(57,255,20,0.15);
+        }
+        .live-dot {
+            width: 8px; height: 8px; border-radius: 50%; background: var(--neon);
+            box-shadow: 0 0 8px var(--neon);
+            animation: pulse-dot 1.5s ease-in-out infinite;
+        }
+        .tracking-map-container {
+            height: 200px;
+            position: relative;
+        }
+        .tracking-stats {
+            display: flex;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .tracking-stat {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            border-right: 1px solid rgba(255,255,255,0.05);
+        }
+        .tracking-stat:last-child { border-right: none; }
+        .tracking-stat-val {
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--neon);
+        }
+        .tracking-stat-lbl { font-size: 0.62rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.07em; margin-top: 2px; }
+        .tracking-actions {
+            padding: 10px 14px;
+            display: flex; gap: 8px;
+        }
+        .btn-complete {
+            flex: 2;
+            background: var(--neon);
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            padding: 9px;
+            font-family: 'Syne', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        .btn-complete:hover { opacity: 0.85; }
+        .btn-cancel-job {
+            flex: 1;
+            background: transparent;
+            color: var(--red);
+            border: 1px solid var(--red);
+            border-radius: 8px;
+            padding: 9px;
+            font-family: 'Syne', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 700;
+            cursor: pointer;
         }
 
-        .chat-bubble-bot {
-            background: rgba(57, 255, 20, 0.05);
-            border: 1px solid rgba(57, 255, 20, 0.2);
-            border-radius: 20px 20px 20px 4px;
-            padding: 16px;
-            max-width: 80%;
-            align-self: flex-start;
-            margin-bottom: 16px;
-        }
-
-        .json-viewer {
-            font-family: monospace;
-            background: #111;
-            padding: 16px;
+        /* ── RATING CARD ── */
+        .rating-card {
+            background: rgba(255,215,0,0.06);
+            border: 1px solid rgba(255,215,0,0.3);
             border-radius: 12px;
-            overflow-x: auto;
-            color: #a3a3a3;
-            font-size: 0.85rem;
+            padding: 16px;
+            margin-top: 4px;
+            text-align: center;
         }
-
-        .json-key { color: #39FF14; }
-        .json-string { color: #facc15; }
-
-        /* Loader */
-        .loader {
-            border: 3px solid rgba(57, 255, 20, 0.1);
-            border-top: 3px solid #39FF14;
+        .rating-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 4px;
+        }
+        .rating-subtitle { font-size: 0.78rem; color: var(--text-dim); margin-bottom: 14px; }
+        .stars { display: flex; justify-content: center; gap: 8px; margin-bottom: 12px; }
+        .star-btn {
+            width: 36px; height: 36px;
             border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            animation: spin 1s linear infinite;
+            border: 1px solid rgba(255,215,0,0.3);
+            background: rgba(255,215,0,0.08);
+            color: var(--gold);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.15s;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .star-btn:hover, .star-btn.active { background: rgba(255,215,0,0.25); border-color: var(--gold); transform: scale(1.15); }
+        .btn-submit-rating {
+            background: var(--gold);
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            padding: 9px 24px;
+            font-family: 'Syne', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        .btn-submit-rating:hover { opacity: 0.85; }
+
+        /* Quick chips */
+        .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+        .chip {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text-dim);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.18s;
+        }
+        .chip:hover { border-color: var(--neon-border); color: var(--neon); background: var(--neon-dim); }
+
+        /* Input area */
+        #input-area {
+            padding: 12px 16px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: 8px;
+            background: rgba(8,8,8,0.8);
+            flex-shrink: 0;
+        }
+        #user-input {
+            flex: 1;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 10px 14px;
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.875rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        #user-input:focus { border-color: var(--neon-border); }
+        #user-input::placeholder { color: var(--text-dim); }
+        #send-btn {
+            background: var(--neon);
+            color: #000;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 18px;
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            min-width: 70px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        #send-btn:hover { opacity: 0.85; }
+        #send-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+        /* ── MAP PANEL ── */
+        #map-panel { display: flex; flex-direction: column; overflow: hidden; }
+        #map { flex: 1; min-height: 0; }
+        .leaflet-container { background: #111 !important; }
+        #map-overlay {
+            position: relative;
+            height: 46%;
+            flex-shrink: 0;
+            border-top: 1px solid var(--border);
+            overflow-y: auto;
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .map-panel-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 8px;
+            margin-bottom: 4px;
+        }
+        .mini-provider {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 10px;
+            border-radius: 8px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.18s;
+        }
+        .mini-provider:hover { border-color: var(--neon-border); }
+        .mini-provider.ranked-1 { border-color: var(--neon-border); }
+        .mini-rank {
+            width: 22px; height: 22px;
+            border-radius: 50%;
+            background: var(--neon-dim);
+            border: 1px solid var(--neon-border);
+            color: var(--neon);
+            font-family: 'Syne', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 800;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+        .mini-info { flex: 1; min-width: 0; }
+        .mini-name { font-size: 0.8rem; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .mini-sub { font-size: 0.7rem; color: var(--text-dim); }
+        .mini-dist { font-size: 0.72rem; color: var(--neon); font-weight: 600; white-space: nowrap; }
+
+        /* ── TRACE PANEL ── */
+        #trace-panel { overflow-y: auto; padding: 14px; display: flex; flex-direction: column; gap: 14px; }
+        .trace-section { }
+        .trace-label {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+        .agent-trace-row {
+            display: flex;
+            gap: 8px;
+            align-items: flex-start;
+            padding: 8px;
+            border-radius: 8px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            margin-bottom: 5px;
+            transition: border-color 0.2s;
+        }
+        .agent-trace-row.active { border-color: var(--neon-border); }
+        .agent-dot {
+            width: 26px; height: 26px;
+            border-radius: 50%;
+            background: var(--neon-dim);
+            border: 1px solid var(--neon-border);
+            color: var(--neon);
+            font-family: 'Syne', sans-serif;
+            font-size: 0.6rem;
+            font-weight: 800;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+        .agent-dot.idle { background: rgba(255,255,255,0.04); border-color: var(--border); color: var(--text-dim); }
+        .agent-dot.done { background: rgba(57,255,20,0.2); border-color: var(--neon); }
+        .agent-trace-text { font-size: 0.75rem; color: var(--text-dim); line-height: 1.45; }
+        .agent-trace-text strong { color: var(--text); }
+        .trace-json {
+            background: rgba(0,0,0,0.4);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            overflow-x: auto;
+            max-height: 180px;
+            overflow-y: auto;
+        }
+        .jk { color: var(--neon); }
+        .jv { color: #ffd700; }
+        .jn { color: #4fc3f7; }
+        .jb { color: #ff8a65; }
+        .decision-pill {
+            display: inline-block;
+            background: rgba(79,195,247,0.1);
+            border: 1px solid rgba(79,195,247,0.3);
+            color: var(--blue);
+            border-radius: 20px;
+            padding: 2px 8px;
+            font-size: 0.65rem;
+            margin: 2px;
+        }
+        .metric-row {
+            display: flex; gap: 8px; flex-wrap: wrap;
+        }
+        .metric-box {
+            flex: 1;
+            min-width: 70px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 8px 10px;
+            text-align: center;
+        }
+        .metric-val {
+            font-family: 'Syne', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--neon);
+        }
+        .metric-lbl {
+            font-size: 0.6rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+        .timeline-item {
+            display: flex;
+            gap: 10px;
+            padding: 6px 0;
+            border-left: 2px solid var(--border);
+            padding-left: 12px;
+            position: relative;
+            margin-left: 4px;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -5px;
+            top: 10px;
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: var(--bg);
+            border: 2px solid var(--border);
+        }
+        .timeline-item.done::before { background: var(--neon); border-color: var(--neon); }
+        .timeline-item.active::before { background: var(--neon); border-color: var(--neon); box-shadow: 0 0 6px var(--neon); }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 4px; height: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+        /* Mobile override */
+        @media (max-width: 900px) {
+            #main { grid-template-columns: 1fr; grid-template-rows: 1fr; overflow-y: auto; }
+            #map-panel, #trace-col { display: none; }
+            html, body { overflow: auto; }
+            #main { overflow: visible; }
         }
 
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        /* Spinner */
+        .spin {
+            width: 16px; height: 16px;
+            border: 2px solid rgba(0,0,0,0.2);
+            border-top-color: #000;
+            border-radius: 50%;
+            animation: rotate 0.7s linear infinite;
+            display: inline-block;
+        }
+        @keyframes rotate { to { transform: rotate(360deg); } }
 
-        ::-webkit-scrollbar { width: 8px; height: 8px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 4px; }
+        /* Status banners */
+        .status-banner {
+            padding: 12px 14px;
+            border-radius: 12px;
+            font-size: 0.82rem;
+            margin-top: 4px;
+            border: 1px solid;
+        }
+        .status-banner.arrived { background: rgba(255,215,0,0.08); border-color: rgba(255,215,0,0.35); color: var(--yellow); }
+        .status-banner.completed { background: rgba(57,255,20,0.08); border-color: var(--neon-border); color: var(--neon); }
+        .status-banner.cancelled { background: rgba(255,68,68,0.08); border-color: rgba(255,68,68,0.35); color: var(--red); }
+
+        /* Empty trace placeholder */
+        .trace-empty {
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 0.78rem;
+            padding: 40px 20px;
+            line-height: 1.7;
+        }
+        .trace-empty .icon { font-size: 2rem; margin-bottom: 10px; opacity: 0.4; }
+
+        /* Agent color helpers */
+        .agent-zara { color: #00e5ff; }
+        .agent-khoji { color: var(--neon); }
+        .agent-mukhtar { color: var(--gold); }
+        .agent-yakeen { color: #ce93d8; }
+        .agent-hifazat { color: var(--red); }
+        .agent-system { color: var(--text-dim); }
     </style>
 </head>
-<body class="p-4 md:p-8">
+<body>
 
-    <div class="max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-8 h-[calc(100vh-4rem)]">
-        
-        <!-- Left Column: Chat & Interaction -->
-        <div class="glass-panel flex flex-col h-full overflow-hidden">
-            <!-- Header -->
-            <div class="p-6 border-b border-white/5 flex items-center justify-between">
-                <div>
-                    <h1 class="text-2xl font-extrabold flex items-center gap-3">
-                        <span class="w-10 h-10 rounded-full bg-neon/10 border border-neon/50 flex items-center justify-center primary-neon">K</span>
-                        KhidmatGar <span class="text-white/40 text-sm font-normal ml-2">Web Demo</span>
-                    </h1>
-                </div>
-                <div id="location-badge" class="location-badge text-white/50">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                    <span id="location-text">Detecting...</span>
-                </div>
-            </div>
+<!-- TOP BAR -->
+<div id="topbar">
+    <div class="logo">
+        <div class="logo-icon">⚡</div>
+        <div class="logo-text">Khidmat<span>Gar</span></div>
+    </div>
+    <div class="topbar-right">
+        <div class="loc-pill" id="loc-pill">📍 Detecting location...</div>
+        <div class="backend-status">
+            <div class="status-dot" id="status-dot" style="background:#ffd700;box-shadow:0 0 8px #ffd700"></div>
+            <span id="status-text">Connecting...</span>
+        </div>
+    </div>
+</div>
 
-            <!-- Chat Area -->
-            <div id="chat-container" class="flex-1 p-6 overflow-y-auto flex flex-col">
-                <div class="chat-bubble-bot">
-                    <p class="font-bold text-white mb-1 flex items-center gap-2">
-                        KhidmatGar Agent <span class="agent-pill">ZARA</span>
-                    </p>
-                    <p class="text-white/80 leading-relaxed">Hello! I am your AI service orchestrator. Do you need an AC Technician, Plumber, Electrician, or someone else today?</p>
-                </div>
-            </div>
+<!-- MAIN GRID -->
+<div id="main">
 
-            <!-- Input Area -->
-            <div class="p-6 border-t border-white/5 bg-white/5">
-                <form id="chat-form" class="flex gap-4">
-                    <input type="text" id="user-input" class="flex-1 bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-neon transition-colors placeholder-white/30" placeholder="E.g., I need an AC technician urgently in F-7..." autocomplete="off">
-                    <button type="submit" id="send-btn" class="bg-neon text-black font-bold px-6 py-3 rounded-xl hover:bg-green-400 transition-colors flex items-center justify-center min-w-[100px]">
-                        <span>Send</span>
-                    </button>
-                </form>
+    <!-- ── COLUMN 1: CHAT ── -->
+    <div class="panel" id="chat-col">
+        <div class="panel-header">
+            💬 Chat with KhidmatGar
+            <span class="badge" id="agent-badge">ZARA</span>
+        </div>
+
+        <div id="chat-messages">
+            <!-- Initial bot message -->
+            <div class="msg bot">
+                <div class="agent-label agent-khoji">⚡ KhidmatGar AI</div>
+                <div class="msg-bubble">
+                    <strong>آداب! I'm KhidmatGar AI.</strong><br><br>
+                    5 specialized agents find and book trusted service providers instantly.<br><br>
+                    🤖 <strong>ZARA</strong> → intent · <strong>KHOJI</strong> → discovery · <strong>MUKHTAR</strong> → booking · <strong>YAKEEN</strong> → follow-up · <strong>HIFAZAT</strong> → guardian<br><br>
+                    Tell me what you need — in Urdu, Roman Urdu, or English:
+                    <div class="chips" id="quick-chips">
+                        <span class="chip" onclick="sendChip(this)">AC Technician F-7 today</span>
+                        <span class="chip" onclick="sendChip(this)">Mujhe plumber chahiye G-13 mein</span>
+                        <span class="chip" onclick="sendChip(this)">Electrician urgent Gulshan</span>
+                        <span class="chip" onclick="sendChip(this)">Carpenter kal subah DHA</span>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- Right Column: Antigravity Trace -->
-        <div class="glass-panel flex flex-col h-full overflow-hidden">
-            <div class="p-6 border-b border-white/5 flex items-center gap-3">
-                <div class="w-2 h-2 rounded-full bg-neon animate-pulse"></div>
-                <h2 class="text-lg font-bold font-['Outfit'] tracking-wider">LIVE ANTIGRAVITY TRACE</h2>
-            </div>
-            
-            <div class="flex-1 p-6 overflow-y-auto">
-                <div id="trace-container" class="space-y-6">
-                    <div class="text-center text-white/30 mt-10 text-sm">
-                        Waiting for orchestration to begin...
-                    </div>
-                </div>
+        <div id="input-area">
+            <input type="text" id="user-input" placeholder="e.g. AC technician G-13 kal subah..." autocomplete="off">
+            <button id="send-btn" onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <!-- ── COLUMN 2: MAP ── -->
+    <div id="map-panel">
+        <div class="panel-header">
+            🗺️ Live Provider Map
+            <span id="map-provider-count" class="badge" style="display:none">0 nearby</span>
+        </div>
+        <div id="map"></div>
+        <div id="map-overlay">
+            <div class="trace-empty">
+                <div class="icon">📍</div>
+                Send a service request to see providers on the map
             </div>
         </div>
     </div>
 
-    <script>
-        const chatForm = document.getElementById('chat-form');
-        const userInput = document.getElementById('user-input');
-        const chatContainer = document.getElementById('chat-container');
-        const traceContainer = document.getElementById('trace-container');
-        const sendBtn = document.getElementById('send-btn');
-        const locText = document.getElementById('location-text');
-        const locBadge = document.getElementById('location-badge');
-        
-        let sessionId = null;
-        let clientLat = null;
-        let clientLng = null;
+    <!-- ── COLUMN 3: AGENT TRACE ── -->
+    <div class="panel" id="trace-col">
+        <div class="panel-header">
+            🧠 Live Agent Trace
+            <span id="latency-badge" class="badge" style="display:none"></span>
+        </div>
+        <div id="trace-panel">
+            <div class="trace-empty">
+                <div class="icon">🤖</div>
+                <strong>Antigravity Pipeline</strong><br>
+                5-agent reasoning will appear here as it executes:<br><br>
+                ZARA → KHOJI → MUKHTAR → YAKEEN → HIFAZAT
+            </div>
+        </div>
+    </div>
 
-        // Fetch location on load
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                (pos) => {
-                    clientLat = pos.coords.latitude;
-                    clientLng = pos.coords.longitude;
-                    locText.innerText = `${clientLat.toFixed(4)}, ${clientLng.toFixed(4)}`;
-                    locBadge.classList.add('text-neon', 'border-neon/50');
-                    locBadge.classList.remove('text-white/50');
-                },
-                (err) => {
-                    locText.innerText = "Location Blocked";
-                }
-            );
-        } else {
-            locText.innerText = "No GPS";
-        }
+</div>
 
-        function addChatBubble(text, sender, agentName = null) {
-            const div = document.createElement('div');
-            if (sender === 'user') {
-                div.className = 'chat-bubble-user';
-                div.innerHTML = `<p class="text-white">${text}</p>`;
-            } else {
-                div.className = 'chat-bubble-bot';
-                let header = `<p class="font-bold text-white mb-2 flex items-center gap-2">KhidmatGar ${agentName ? `<span class="agent-pill">${agentName}</span>` : ''}</p>`;
-                
-                // Format text if it contains providers
-                let formattedText = text.replace(/\n/g, '<br>');
-                div.innerHTML = header + `<div class="text-white/80 leading-relaxed">${formattedText}</div>`;
+<script>
+// ═══════════════════════════════════════════════
+//  STATE
+// ═══════════════════════════════════════════════
+let sessionId = null;
+let clientLat = null;
+let clientLng = null;
+let currentProviders = [];
+let currentJobId = null;         // job/booking ID currently active
+let activeBooking = null;        // full booking object after confirmation
+let pollingInterval = null;
+let statusPollInterval = null;
+let mapInstance = null;
+let mapMarkers = [];
+let userMarker = null;
+let trackingMap = null;          // leaflet map inside tracking card
+let trackingClientMarker = null;
+let trackingProviderMarker = null;
+let trackingPolyline = null;
+let backendOk = false;
+let deliveredBidIds = new Set(); // prevent duplicate bids in same session
+let pendingMockBids = {};        // provider_id → mock provider data
+
+const API = ''; // same origin
+
+// ═══════════════════════════════════════════════
+//  MAP
+// ═══════════════════════════════════════════════
+function initMap(lat, lng) {
+    if (mapInstance) return;
+    mapInstance = L.map('map', { zoomControl: true, attributionControl: false })
+        .setView([lat || 33.6844, lng || 73.0479], 12);
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { maxZoom: 19 }).addTo(mapInstance);
+    if (lat && lng) {
+        const userIcon = L.divIcon({
+            html: '<div style="width:14px;height:14px;border-radius:50%;background:#39FF14;border:3px solid #fff;box-shadow:0 0 10px #39FF14"></div>',
+            className: '', iconAnchor: [7,7]
+        });
+        userMarker = L.marker([lat, lng], { icon: userIcon }).addTo(mapInstance);
+        userMarker.bindPopup('<b>Your Location</b>');
+    }
+}
+
+function addProviderMarkers(providers) {
+    mapMarkers.forEach(m => mapInstance && mapInstance.removeLayer(m));
+    mapMarkers = [];
+    if (!mapInstance) initMap(providers[0]?.coordinates?.lat, providers[0]?.coordinates?.lng);
+    const bounds = [];
+    if (userMarker) bounds.push(userMarker.getLatLng());
+    providers.forEach((p, i) => {
+        const lat = p.coordinates?.lat || p.lat;
+        const lng = p.coordinates?.lng || p.lng;
+        if (!lat || !lng) return;
+        const color = i === 0 ? '#39FF14' : '#4fc3f7';
+        const icon = L.divIcon({
+            html: `<div style="width:28px;height:28px;border-radius:50%;background:${color}22;border:2px solid ${color};display:flex;align-items:center;justify-content:center;color:${color};font-weight:bold;font-size:11px;font-family:Syne,sans-serif;">${i+1}</div>`,
+            className: '', iconAnchor: [14,14]
+        });
+        const rating = p.rating?.toFixed(1) || 'N/A';
+        const price = p.pricing?.estimated_total_pkr || p.estimated_total_pkr || 'N/A';
+        const dist = p.distance_km ? `${p.distance_km.toFixed(1)} km` : '';
+        const marker = L.marker([lat, lng], { icon }).addTo(mapInstance);
+        marker.bindPopup(`<div style="font-family:DM Sans,sans-serif;min-width:160px"><b style="color:${color}">#${i+1} ${p.business_name || p.name}</b><br>⭐ ${rating} &nbsp; 💰 PKR ${price}<br>${dist ? `📍 ${dist} away` : ''}${i===0 ? '<br><small style="color:'+color+'">✦ AI Top Pick</small>' : ''}</div>`);
+        mapMarkers.push(marker);
+        bounds.push([lat, lng]);
+    });
+    if (bounds.length > 1) mapInstance.fitBounds(bounds, { padding: [40, 40] });
+    else if (bounds.length === 1) mapInstance.setView(bounds[0], 13);
+}
+
+// ═══════════════════════════════════════════════
+//  LOCATION
+// ═══════════════════════════════════════════════
+function initLocation() {
+    const pill = document.getElementById('loc-pill');
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            pos => {
+                clientLat = pos.coords.latitude;
+                clientLng = pos.coords.longitude;
+                pill.textContent = `📍 ${clientLat.toFixed(4)}, ${clientLng.toFixed(4)}`;
+                pill.style.color = '#39FF14';
+                initMap(clientLat, clientLng);
+            },
+            () => {
+                pill.textContent = '📍 Islamabad (default)';
+                clientLat = 33.6844; clientLng = 73.0479;
+                initMap(clientLat, clientLng);
             }
-            chatContainer.appendChild(div);
-            chatContainer.scrollTop = chatContainer.scrollHeight;
-        }
+        );
+    } else {
+        pill.textContent = '📍 Islamabad (default)';
+        clientLat = 33.6844; clientLng = 73.0479;
+        initMap(clientLat, clientLng);
+    }
+}
 
-        function syntaxHighlight(json) {
-            if (typeof json != 'string') {
-                json = JSON.stringify(json, undefined, 2);
-            }
-            json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-            return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
-                let cls = 'text-blue-400';
-                if (/^"/.test(match)) {
-                    if (/:$/.test(match)) {
-                        cls = 'json-key';
-                    } else {
-                        cls = 'json-string';
-                    }
-                } else if (/true|false/.test(match)) {
-                    cls = 'text-green-400';
-                } else if (/null/.test(match)) {
-                    cls = 'text-red-400';
-                }
-                return '<span class="' + cls + '">' + match + '</span>';
-            });
+// ═══════════════════════════════════════════════
+//  BACKEND HEALTH
+// ═══════════════════════════════════════════════
+async function checkBackend() {
+    const dot = document.getElementById('status-dot');
+    const txt = document.getElementById('status-text');
+    try {
+        const r = await fetch(`${API}/health`, { signal: AbortSignal.timeout(3000) });
+        if (r.ok) {
+            const d = await r.json();
+            backendOk = true;
+            dot.style.background = '#39FF14';
+            dot.style.boxShadow = '0 0 8px #39FF14';
+            txt.textContent = `Backend v${d.version} ● Gemini ${d.env?.gemini_configured ? '✓' : '✗'}`;
+            return true;
         }
+    } catch(e) {}
+    dot.style.background = '#ff4444';
+    dot.style.boxShadow = '0 0 8px #ff4444';
+    txt.textContent = 'Backend offline — start FastAPI server';
+    return false;
+}
 
-        function updateTrace(trace) {
-            if (!trace) return;
-            
-            traceContainer.innerHTML = '';
-            
-            // Task Plan
-            const taskPlan = trace.task_plan || {};
-            const tpDiv = document.createElement('div');
-            tpDiv.className = 'mb-6';
-            tpDiv.innerHTML = `
-                <h3 class="text-white/50 text-xs font-bold uppercase tracking-widest mb-2">Task Plan Status</h3>
-                <div class="bg-white/5 border border-white/10 rounded-lg p-4">
-                    <div class="flex justify-between items-center mb-2">
-                        <span class="font-bold text-white">${taskPlan.primary_goal || 'Unknown Goal'}</span>
-                        <span class="text-xs px-2 py-1 rounded bg-neon/20 text-neon">${taskPlan.status || 'PENDING'}</span>
-                    </div>
-                    <div class="text-sm text-white/60">Sub-goals: ${taskPlan.sub_goals?.join(', ')}</div>
+// ═══════════════════════════════════════════════
+//  CHAT HELPERS
+// ═══════════════════════════════════════════════
+const chatMessages = document.getElementById('chat-messages');
+function scrollChat() { chatMessages.scrollTop = chatMessages.scrollHeight; }
+
+function agentColorClass(name) {
+    if (!name) return '';
+    switch(name.toUpperCase()) {
+        case 'ZARA': return 'agent-zara';
+        case 'KHOJI': return 'agent-khoji';
+        case 'MUKHTAR': return 'agent-mukhtar';
+        case 'YAKEEN': return 'agent-yakeen';
+        case 'HIFAZAT': return 'agent-hifazat';
+        default: return 'agent-system';
+    }
+}
+
+function addMessage(html, isUser, agentName = null) {
+    const div = document.createElement('div');
+    div.className = `msg ${isUser ? 'user' : 'bot'}`;
+    if (!isUser && agentName) {
+        const cls = agentColorClass(agentName);
+        div.innerHTML = `<div class="agent-label ${cls}">● ${agentName}</div><div class="msg-bubble">${html}</div>`;
+    } else {
+        div.innerHTML = `<div class="msg-bubble">${html}</div>`;
+    }
+    chatMessages.appendChild(div);
+    scrollChat();
+    return div;
+}
+
+function showTyping() {
+    const div = document.createElement('div');
+    div.className = 'msg bot';
+    div.id = 'typing-indicator';
+    div.innerHTML = `<div class="agent-label agent-system">● Processing...</div><div class="msg-bubble"><div class="typing-indicator"><span></span><span></span><span></span></div></div>`;
+    chatMessages.appendChild(div);
+    scrollChat();
+}
+function hideTyping() {
+    const t = document.getElementById('typing-indicator');
+    if (t) t.remove();
+}
+
+// ═══════════════════════════════════════════════
+//  PROVIDER CARDS
+// ═══════════════════════════════════════════════
+function renderProviderCards(providers) {
+    if (!providers || !providers.length) return '';
+    const cards = providers.slice(0, 3).map((p, i) => {
+        const name = p.business_name || p.name || 'Provider';
+        const price = p.pricing?.estimated_total_pkr || p.estimated_total_pkr || '—';
+        const rating = p.rating?.toFixed(1) || 'N/A';
+        const dist = p.distance_km ? `${p.distance_km.toFixed(1)} km` : '';
+        const eta = p.availability?.next_slot || p.eta || '';
+        const verified = p.verification?.level || '';
+        return `
+        <div class="provider-card ${i===0?'top':''}" id="pcard-${p.provider_id}">
+            <div class="pcard-name">${name}</div>
+            <div class="pcard-meta">
+                <span>⭐ ${rating}</span>
+                ${dist ? `<span>📍 ${dist}</span>` : ''}
+                ${eta ? `<span>🕐 ${eta}</span>` : ''}
+                ${verified ? `<span>✓ ${verified.replace('_',' ')}</span>` : ''}
+            </div>
+            <div style="margin-top:6px" class="pcard-price">PKR ${typeof price === 'number' ? price.toLocaleString() : price}</div>
+            <button class="pcard-book-btn" onclick="bookProvider('${p.provider_id}', '${(name).replace(/'/g,"\\'")}')">
+                ⚡ Book ${name.split(' ').slice(0,2).join(' ')}
+            </button>
+        </div>`;
+    }).join('');
+    return `<div class="provider-cards">${cards}</div>`;
+}
+
+function bookProvider(providerId, name) {
+    document.querySelectorAll('.pcard-book-btn').forEach(b => {
+        b.disabled = true; b.textContent = '⏳ Requesting...';
+    });
+    addMessage(`Book <strong>${name}</strong>`, true);
+    doOrchestration(`SYSTEM_BOOK_PROVIDER:${providerId}`);
+}
+
+// ═══════════════════════════════════════════════
+//  BID CARD
+// ═══════════════════════════════════════════════
+function renderBidCard(providerName, price, eta, jobId, providerId, isMock, mockProviderData) {
+    // Dedup by providerId alone — each provider can only bid once per request cycle
+    const bidKey = String(providerId);
+    if (deliveredBidIds.has(bidKey)) return null;
+    deliveredBidIds.add(bidKey);
+
+    const bidId = 'bid-' + Date.now() + '-' + Math.random().toString(36).substr(2,5);
+    // Store mock data for confirmation
+    if (isMock && mockProviderData) {
+        pendingMockBids[bidId] = { providerName, price, eta, jobId, providerId, isMock, mockProviderData };
+    } else {
+        pendingMockBids[bidId] = { providerName, price, eta, jobId, providerId, isMock };
+    }
+
+    return `
+    <div class="bid-card" id="${bidId}">
+        <div class="bid-header">
+            <div class="bid-badge">📨 BID RECEIVED</div>
+            <div class="bid-provider">${providerName}</div>
+        </div>
+        <div class="bid-details">
+            <div class="bid-stat">
+                <div class="bid-stat-val">PKR ${Number(price).toLocaleString()}</div>
+                <div class="bid-stat-lbl">Price</div>
+            </div>
+            <div style="width:1px;background:rgba(255,255,255,0.08)"></div>
+            <div class="bid-stat">
+                <div class="bid-stat-val">${eta} min</div>
+                <div class="bid-stat-lbl">ETA</div>
+            </div>
+            <div style="width:1px;background:rgba(255,255,255,0.08)"></div>
+            <div class="bid-stat">
+                <div class="bid-stat-val">${isMock ? 'MOCK' : 'REAL'}</div>
+                <div class="bid-stat-lbl">Provider</div>
+            </div>
+        </div>
+        <div class="bid-actions">
+            <button class="btn-confirm" onclick="confirmBid('${bidId}', this)">✓ Confirm Booking</button>
+            <button class="btn-decline" onclick="declineBid('${bidId}')">✗ Decline</button>
+        </div>
+    </div>`;
+}
+
+function declineBid(bidId) {
+    const el = document.getElementById(bidId);
+    if (el) {
+        el.style.opacity = '0';
+        el.style.transform = 'scale(0.95)';
+        el.style.transition = 'all 0.25s';
+        setTimeout(() => el.remove(), 250);
+    }
+    delete pendingMockBids[bidId];
+    addMessage('Bid dismissed. Dusra provider bhi available hai.', false, 'SYSTEM');
+    scrollChat();
+}
+
+async function confirmBid(bidId, btn) {
+    const bid = pendingMockBids[bidId];
+    if (!bid) return;
+
+    btn.disabled = true;
+    btn.innerHTML = '<div class="spin"></div> Confirming...';
+    const bidEl = document.getElementById(bidId);
+    if (bidEl) {
+        const btns = bidEl.querySelectorAll('button');
+        btns.forEach(b => b.disabled = true);
+    }
+
+    if (bid.isMock) {
+        await confirmMockBid(bid, bidId);
+    } else {
+        // Real provider — call backend
+        addMessage(`Confirming booking with <strong>${bid.providerName}</strong>...`, true);
+        await doOrchestration(`SYSTEM_BOOK_PROVIDER:${bid.providerId}`);
+        if (bidEl) bidEl.remove();
+    }
+    delete pendingMockBids[bidId];
+}
+
+async function confirmMockBid(bid, bidId) {
+    // Simulate server-side processing delay
+    await new Promise(r => setTimeout(r, 800));
+
+    const ts = Date.now().toString();
+    const bookingId = 'KG-' + ts.substring(ts.length - 6);
+    const mockData = bid.mockProviderData || {};
+
+    const booking = {
+        booking_id: bookingId,
+        provider_id: bid.providerId,
+        provider_name: bid.providerName,
+        provider_phone: mockData.phone || '0300-1234567',
+        provider_rating: mockData.rating || 4.5,
+        service_type: (mockData.service_categories || ['HOME SERVICE'])[0],
+        slot: 'Today, As Soon As Possible',
+        eta_minutes: parseInt(bid.eta) || 25,
+        is_mock: true,
+        status: 'CONFIRMED',
+        location: {
+            area: mockData.location?.area || 'Local Area',
+            city: mockData.location?.city || 'Islamabad',
+            lat: clientLat,
+            lng: clientLng,
+            provider_coordinates: mockData.coordinates || mockData.location?.coordinates || null,
+        },
+        pricing: {
+            estimated_total_pkr: parseInt(bid.price),
+            bid_amount_pkr: parseInt(bid.price),
+            payment_method: 'CASH_ON_DELIVERY',
+        },
+        created_at: new Date().toISOString(),
+    };
+
+    activeBooking = booking;
+    currentJobId = bookingId;
+
+    // Remove bid card
+    const bidEl = document.getElementById(bidId);
+    if (bidEl) bidEl.remove();
+
+    // Show full receipt
+    showBookingReceipt(booking);
+
+    // Show followup from YAKEEN after 2s
+    setTimeout(() => {
+        addMessage(
+            `📲 Main <strong>${bid.providerName}</strong> ko track kar raha hun. ~${bid.eta} minute mein pahunchenge. Jab kaam muka le toh booking ko "Complete" mark karna aur rating zaroor dena! ⭐`,
+            false, 'YAKEEN'
+        );
+        scrollChat();
+    }, 2000);
+
+    // Start status polling for mock booking
+    startStatusPolling(bookingId);
+}
+
+// ═══════════════════════════════════════════════
+//  BOOKING RECEIPT
+// ═══════════════════════════════════════════════
+function showBookingReceipt(booking) {
+    stopPolling();
+    const b = booking;
+    const service = (b.service_type || '').replace(/_/g, ' ');
+    const price = b.pricing?.bid_amount_pkr || b.pricing?.estimated_total_pkr || '—';
+    const payment = (b.pricing?.payment_method || 'CASH ON DELIVERY').replace(/_/g, ' ');
+    const area = b.location?.area || '—';
+    const city = b.location?.city || '';
+    const eta = b.eta_minutes || '—';
+    const rating = parseFloat(b.provider_rating || 0).toFixed(1);
+
+    const html = `
+    <div class="booking-receipt">
+        <div class="receipt-header">
+            <div class="receipt-icon">🧾</div>
+            <div>
+                <div class="receipt-title">Service Booking Receipt</div>
+                <div class="receipt-subtitle">✅ KhidmatGar — Confirmed</div>
+            </div>
+        </div>
+        <div class="receipt-id-banner">BOOKING ID: ${b.booking_id}</div>
+        <div class="receipt-body">
+            <div>
+                <div class="receipt-section-label">Service Details</div>
+                <div class="receipt-rows">
+                    <div class="receipt-row"><span class="receipt-row-icon">🔧</span><span class="receipt-row-label">Service</span><span class="receipt-row-value">${service}</span></div>
+                    <div class="receipt-row"><span class="receipt-row-icon">📅</span><span class="receipt-row-label">Slot</span><span class="receipt-row-value">${b.slot || 'ASAP'}</span></div>
+                    <div class="receipt-row"><span class="receipt-row-icon">⏱</span><span class="receipt-row-label">ETA</span><span class="receipt-row-value">${eta} minutes</span></div>
+                    <div class="receipt-row"><span class="receipt-row-icon">📍</span><span class="receipt-row-label">Location</span><span class="receipt-row-value">${area}${city ? ', '+city : ''}</span></div>
                 </div>
-            `;
-            traceContainer.appendChild(tpDiv);
+            </div>
+            <div>
+                <div class="receipt-section-label">Provider Details</div>
+                <div class="receipt-rows">
+                    <div class="receipt-row"><span class="receipt-row-icon">👤</span><span class="receipt-row-label">Provider</span><span class="receipt-row-value">${b.provider_name}</span></div>
+                    <div class="receipt-row"><span class="receipt-row-icon">📞</span><span class="receipt-row-label">Contact</span><span class="receipt-row-value">${b.provider_phone || '—'}</span></div>
+                    <div class="receipt-row"><span class="receipt-row-icon">⭐</span><span class="receipt-row-label">Rating</span><span class="receipt-row-value">★ ${rating} / 5.0</span></div>
+                </div>
+            </div>
+            <div class="receipt-price-box">
+                <span style="font-size:1.2rem">💰</span>
+                <div>
+                    <div style="font-size:0.7rem;color:var(--text-dim);margin-bottom:2px">Estimated Cost</div>
+                    <div class="price-amount">PKR ${typeof price === 'number' ? price.toLocaleString() : price}</div>
+                </div>
+                <div class="price-method">${payment}</div>
+            </div>
+        </div>
+        <div class="receipt-actions">
+            <button class="btn-track" onclick="openTrackingView('${b.booking_id}')">🗺 Track Provider Live</button>
+            <button class="btn-cancel-booking" onclick="cancelBooking('${b.booking_id}')">✗ Cancel</button>
+        </div>
+    </div>`;
 
-            // Agent Observations
-            const obs = trace.agent_observations || {};
-            const obsDiv = document.createElement('div');
-            obsDiv.className = 'mb-6';
-            let obsHtml = `<h3 class="text-white/50 text-xs font-bold uppercase tracking-widest mb-2">Agent Observations</h3>`;
-            for (const [agent, notes] of Object.entries(obs)) {
-                if (notes) {
-                    obsHtml += `
-                        <div class="bg-white/5 border-l-2 border-neon p-3 mb-2 rounded-r-lg">
-                            <span class="text-neon text-xs font-bold">${agent}</span>
-                            <p class="text-sm text-white/80 mt-1">${notes}</p>
-                        </div>
-                    `;
-                }
-            }
-            obsDiv.innerHTML = obsHtml;
-            traceContainer.appendChild(obsDiv);
+    addMessage(html, false, 'MUKHTAR');
+    scrollChat();
+}
 
-            // Raw JSON
-            const rawDiv = document.createElement('div');
-            rawDiv.innerHTML = `
-                <h3 class="text-white/50 text-xs font-bold uppercase tracking-widest mb-2">Raw JSON Output</h3>
-                <pre class="json-viewer">${syntaxHighlight(trace)}</pre>
-            `;
-            traceContainer.appendChild(rawDiv);
-        }
+// ═══════════════════════════════════════════════
+//  TRACKING VIEW (inline in chat)
+// ═══════════════════════════════════════════════
+function openTrackingView(bookingId) {
+    const bk = activeBooking;
+    if (!bk) return;
 
-        chatForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const message = userInput.value.trim();
-            if (!message) return;
+    const trackingId = 'tracking-' + bookingId;
+    // Don't duplicate
+    if (document.getElementById(trackingId)) {
+        document.getElementById(trackingId).scrollIntoView({ behavior: 'smooth' });
+        return;
+    }
 
-            addChatBubble(message, 'user');
-            userInput.value = '';
-            
-            sendBtn.innerHTML = '<div class="loader border-black/20 border-t-black"></div>';
-            sendBtn.disabled = true;
+    const mapId = 'tmap-' + bookingId;
+    const html = `
+    <div class="tracking-panel" id="${trackingId}">
+        <div class="tracking-header">
+            <div class="live-dot"></div>
+            <span style="font-family:Syne,sans-serif;font-weight:700;font-size:0.85rem">Tracking ${bk.provider_name}</span>
+            <span style="font-size:0.7rem;color:var(--text-dim);margin-left:auto">${bookingId}</span>
+        </div>
+        <div class="tracking-map-container">
+            <div id="${mapId}" style="width:100%;height:100%"></div>
+        </div>
+        <div class="tracking-stats">
+            <div class="tracking-stat">
+                <div class="tracking-stat-val" id="tdist-${bookingId}">—</div>
+                <div class="tracking-stat-lbl">Distance</div>
+            </div>
+            <div class="tracking-stat">
+                <div class="tracking-stat-val" id="teta-${bookingId}">—</div>
+                <div class="tracking-stat-lbl">ETA</div>
+            </div>
+            <div class="tracking-stat">
+                <div class="tracking-stat-val" id="tstatus-${bookingId}" style="font-size:0.7rem;color:var(--neon)">EN ROUTE</div>
+                <div class="tracking-stat-lbl">Status</div>
+            </div>
+        </div>
+        <div class="tracking-actions">
+            <button class="btn-complete" onclick="markJobComplete('${bookingId}')">✅ Mark Complete</button>
+            <button class="btn-cancel-job" onclick="cancelBooking('${bookingId}')">✗ Cancel Job</button>
+        </div>
+    </div>`;
 
-            // Optional: check if they typed "book" to simulate button click
-            let finalMessage = message;
-            if (message.toLowerCase().startsWith('book ')) {
-                // e.g. "book PRV-123"
-                finalMessage = "SYSTEM_BOOK_PROVIDER:" + message.substring(5).trim();
-            }
+    addMessage(html, false, 'YAKEEN');
+    scrollChat();
 
+    // Init tracking map after DOM renders
+    setTimeout(() => initTrackingMap(mapId, bookingId, bk), 100);
+}
+
+function initTrackingMap(mapId, bookingId, booking) {
+    const container = document.getElementById(mapId);
+    if (!container) return;
+
+    const defaultCenter = [clientLat || 33.6844, clientLng || 73.0479];
+    const tmap = L.map(mapId, { zoomControl: false, attributionControl: false })
+        .setView(defaultCenter, 13);
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { maxZoom: 19 }).addTo(tmap);
+
+    // Client marker
+    let clientM = null;
+    let providerM = null;
+    let routeLine = null;
+
+    if (clientLat && clientLng) {
+        const clientIcon = L.divIcon({
+            html: '<div style="width:12px;height:12px;border-radius:50%;background:#39FF14;border:2px solid #fff;box-shadow:0 0 8px #39FF14"></div>',
+            className: '', iconAnchor: [6,6]
+        });
+        clientM = L.marker([clientLat, clientLng], { icon: clientIcon }).addTo(tmap);
+        clientM.bindPopup('Your Location');
+    }
+
+    // Provider start position — offset from client for mock
+    const bkCoords = booking.location?.provider_coordinates;
+    let provLat = bkCoords?.lat;
+    let provLng = bkCoords?.lng;
+
+    // For mock providers without real coords, generate nearby random position
+    if (!provLat || !provLng) {
+        const baseLat = clientLat || 33.6844;
+        const baseLng = clientLng || 73.0479;
+        provLat = baseLat + (Math.random() - 0.5) * 0.04;
+        provLng = baseLng + (Math.random() - 0.5) * 0.04;
+    }
+
+    const provIcon = L.divIcon({
+        html: '<div style="width:28px;height:28px;border-radius:50%;background:rgba(57,255,20,0.2);border:2px solid #39FF14;display:flex;align-items:center;justify-content:center;font-size:14px;">🔧</div>',
+        className: '', iconAnchor: [14,14]
+    });
+    providerM = L.marker([provLat, provLng], { icon: provIcon }).addTo(tmap);
+    providerM.bindPopup(booking.provider_name || 'Provider');
+
+    // Fit both
+    if (clientLat && clientLng) {
+        tmap.fitBounds([[clientLat, clientLng],[provLat, provLng]], { padding: [20,20] });
+        routeLine = L.polyline([[provLat, provLng],[clientLat, clientLng]], {
+            color: '#39FF14', weight: 2, dashArray: '8,6'
+        }).addTo(tmap);
+        updateTrackingStats(bookingId, clientLat, clientLng, provLat, provLng);
+    }
+
+    // Simulate provider moving toward client (for mock bookings)
+    if (booking.is_mock) {
+        simulateProviderMovement(bookingId, tmap, providerM, routeLine, provLat, provLng);
+    } else {
+        // Poll real provider location every 4s
+        const pollTmap = setInterval(async () => {
             try {
-                const response = await fetch('/v1/workflows/khidmatgar-master/run', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        inputs: { 
-                            user_message: finalMessage, 
-                            platform: 'web',
-                            client_lat: clientLat,
-                            client_lng: clientLng
-                        },
-                        session_id: sessionId
-                    })
-                });
-
-                const data = await response.json();
-                sessionId = data.session_id || sessionId;
-
-                // Check if providers were found to show interactive buttons
-                let botMessage = data.user_message;
-                
-                if (data.providers && data.providers.length > 0 && data.current_agent !== 'MUKHTAR' && data.current_agent !== 'HIFAZAT' && !data.booking_data) {
-                    botMessage += "<br><br><div class='flex gap-2 mt-2 flex-wrap'>";
-                    data.providers.forEach(p => {
-                        botMessage += `<button onclick="submitBooking('${p.provider_id}')" class="bg-white/10 hover:bg-white/20 border border-white/20 px-3 py-2 rounded-lg text-sm text-white transition-colors">Book ${p.business_name || p.name}</button>`;
-                    });
-                    botMessage += "</div>";
+                const r = await fetch(`${API}/provider/location/${booking.provider_id}`);
+                if (r.ok) {
+                    const d = await r.json();
+                    if (d.lat && d.lng) {
+                        providerM.setLatLng([d.lat, d.lng]);
+                        if (routeLine) routeLine.setLatLngs([[d.lat, d.lng],[clientLat||33.6844, clientLng||73.0479]]);
+                        updateTrackingStats(bookingId, clientLat, clientLng, d.lat, d.lng);
+                    }
                 }
+            } catch(e) {}
+        }, 4000);
+        // Store interval ref to clear on complete/cancel
+        window['tmap_poll_' + bookingId] = pollTmap;
+    }
+}
 
-                addChatBubble(botMessage, 'bot', data.current_agent);
-                updateTrace(data.antigravity_trace);
+function simulateProviderMovement(bookingId, tmap, marker, routeLine, startLat, startLng) {
+    // Simulate provider moving toward client over ~2 minutes
+    const targetLat = clientLat || 33.6844;
+    const targetLng = clientLng || 73.0479;
+    let step = 0;
+    const totalSteps = 24; // 24 × 5s = 2min
+    const interval = setInterval(() => {
+        step++;
+        const t = step / totalSteps;
+        const curLat = startLat + (targetLat - startLat) * t;
+        const curLng = startLng + (targetLng - startLng) * t;
+        marker.setLatLng([curLat, curLng]);
+        if (routeLine) routeLine.setLatLngs([[curLat, curLng],[targetLat, targetLng]]);
+        updateTrackingStats(bookingId, targetLat, targetLng, curLat, curLng);
+        if (step >= totalSteps) {
+            clearInterval(interval);
+            document.getElementById('tstatus-' + bookingId).textContent = 'ARRIVED';
+            addMessage('<div class="status-banner arrived">🚗 Your provider has arrived at the location!</div>', false, 'YAKEEN');
+            scrollChat();
+        }
+    }, 5000);
+    window['tmap_poll_' + bookingId] = interval;
+}
 
-            } catch (err) {
-                addChatBubble("Connection Error: Make sure the FastAPI backend is running.", 'bot', 'SYSTEM');
-            } finally {
-                sendBtn.innerHTML = '<span>Send</span>';
-                sendBtn.disabled = false;
-            }
+function updateTrackingStats(bookingId, lat1, lng1, lat2, lng2) {
+    const distKm = haversine(lat1, lng1, lat2, lng2);
+    const etaMins = Math.round((distKm / 30) * 60);
+    const distEl = document.getElementById('tdist-' + bookingId);
+    const etaEl = document.getElementById('teta-' + bookingId);
+    if (distEl) distEl.textContent = distKm.toFixed(1) + ' km';
+    if (etaEl) etaEl.textContent = Math.max(1, etaMins) + ' min';
+}
+
+function haversine(lat1, lng1, lat2, lng2) {
+    const R = 6371;
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLng = (lng2 - lng1) * Math.PI / 180;
+    const a = Math.sin(dLat/2)**2 + Math.cos(lat1*Math.PI/180) * Math.cos(lat2*Math.PI/180) * Math.sin(dLng/2)**2;
+    return R * 2 * Math.asin(Math.sqrt(a));
+}
+
+// ═══════════════════════════════════════════════
+//  JOB COMPLETE
+// ═══════════════════════════════════════════════
+async function markJobComplete(bookingId) {
+    const btn = event.target;
+    btn.disabled = true;
+    btn.innerHTML = '<div class="spin" style="border-top-color:#000"></div>';
+
+    try {
+        await fetch(`${API}/bookings/${bookingId}/complete`, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ booking_id: bookingId })
+        });
+    } catch(e) {}
+
+    // Clear any polling
+    clearTrackingPoll(bookingId);
+    stopPolling();
+
+    addMessage('<div class="status-banner completed">🎉 Job marked as complete! Please rate the service.</div>', false, 'YAKEEN');
+    scrollChat();
+
+    // Show rating card after brief delay
+    setTimeout(() => showRatingCard(bookingId, activeBooking?.provider_id, activeBooking?.provider_name), 800);
+}
+
+function clearTrackingPoll(bookingId) {
+    const p = window['tmap_poll_' + bookingId];
+    if (p) { clearInterval(p); delete window['tmap_poll_' + bookingId]; }
+}
+
+// ═══════════════════════════════════════════════
+//  CANCEL BOOKING
+// ═══════════════════════════════════════════════
+async function cancelBooking(bookingId) {
+    if (!confirm(`Cancel booking ${bookingId}? This cannot be undone.`)) return;
+
+    try {
+        await fetch(`${API}/bookings/${bookingId}/cancel`, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'}
+        });
+    } catch(e) {}
+
+    clearTrackingPoll(bookingId);
+    stopPolling();
+    activeBooking = null;
+    currentJobId = null;
+
+    addMessage(`<div class="status-banner cancelled">❌ Booking ${bookingId} has been cancelled.</div>`, false, 'SYSTEM');
+    scrollChat();
+}
+
+// ═══════════════════════════════════════════════
+//  RATING CARD
+// ═══════════════════════════════════════════════
+function showRatingCard(bookingId, providerId, providerName) {
+    let selectedRating = 0;
+    const cardId = 'rating-' + bookingId;
+
+    const html = `
+    <div class="rating-card" id="${cardId}">
+        <div class="rating-title">⭐ Rate ${providerName || 'the Provider'}</div>
+        <div class="rating-subtitle">Your feedback helps improve the platform</div>
+        <div class="stars" id="stars-${bookingId}">
+            ${[1,2,3,4,5].map(n => `<button class="star-btn" id="star-${bookingId}-${n}" onclick="selectStar('${bookingId}', ${n})">⭐</button>`).join('')}
+        </div>
+        <button class="btn-submit-rating" onclick="submitRating('${bookingId}', '${providerId || ''}')">Submit Rating</button>
+    </div>`;
+
+    addMessage(html, false, 'YAKEEN');
+    scrollChat();
+}
+
+function selectStar(bookingId, n) {
+    for (let i = 1; i <= 5; i++) {
+        const s = document.getElementById(`star-${bookingId}-${i}`);
+        if (s) s.classList.toggle('active', i <= n);
+    }
+    // Store in element dataset
+    const card = document.getElementById('rating-' + bookingId);
+    if (card) card.dataset.rating = n;
+}
+
+async function submitRating(bookingId, providerId) {
+    const card = document.getElementById('rating-' + bookingId);
+    const rating = card ? parseInt(card.dataset.rating || 0) : 0;
+    if (!rating) {
+        alert('Please select a star rating first.');
+        return;
+    }
+
+    const submitBtn = card?.querySelector('.btn-submit-rating');
+    if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Submitting...'; }
+
+    try {
+        await fetch(`${API}/rate`, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ provider_id: providerId, rating, booking_id: bookingId })
+        });
+    } catch(e) {}
+
+    if (card) {
+        card.innerHTML = `<div style="padding:12px;text-align:center;color:var(--gold)">${'⭐'.repeat(rating)} <br><span style="font-size:0.8rem;color:var(--text-dim)">Rating submitted! Thank you.</span></div>`;
+    }
+
+    addMessage(`Rating submitted: ${'⭐'.repeat(rating)} (${rating}/5). Thank you for your feedback!`, false, 'YAKEEN');
+    scrollChat();
+}
+
+// ═══════════════════════════════════════════════
+//  MAP OVERLAY PANEL
+// ═══════════════════════════════════════════════
+function updateMapOverlay(providers) {
+    const el = document.getElementById('map-overlay');
+    const badge = document.getElementById('map-provider-count');
+    if (!providers || !providers.length) return;
+    badge.style.display = '';
+    badge.textContent = `${providers.length} nearby`;
+    const rows = providers.slice(0, 5).map((p, i) => {
+        const name = p.business_name || p.name;
+        const dist = p.distance_km ? `${p.distance_km.toFixed(1)} km` : '';
+        const rating = p.rating?.toFixed(1) || '';
+        return `
+        <div class="mini-provider ranked-${i+1}" onclick="focusProvider(${p.coordinates?.lat||p.lat},${p.coordinates?.lng||p.lng},'${name.replace(/'/g,"\\'")}')">
+            <div class="mini-rank">${i+1}</div>
+            <div class="mini-info">
+                <div class="mini-name">${name}</div>
+                <div class="mini-sub">⭐ ${rating} · ${p.service_categories?.[0]?.replace('_',' ')||''}</div>
+            </div>
+            ${dist ? `<div class="mini-dist">${dist}</div>` : ''}
+        </div>`;
+    }).join('');
+    el.innerHTML = `<div class="map-panel-title">Ranked Providers</div>${rows}`;
+}
+
+function focusProvider(lat, lng, name) {
+    if (!mapInstance || !lat || !lng) return;
+    mapInstance.setView([lat, lng], 15);
+}
+
+// ═══════════════════════════════════════════════
+//  AGENT TRACE RENDERER
+// ═══════════════════════════════════════════════
+function updateTrace(data) {
+    const panel = document.getElementById('trace-panel');
+    const latBadge = document.getElementById('latency-badge');
+    if (!data) return;
+    if (data.latency_ms) {
+        latBadge.style.display = '';
+        latBadge.textContent = `${data.latency_ms}ms`;
+    }
+    const tr = data.antigravity_trace || {};
+    const agentTrace = data.agent_trace || {};
+    const activeAgent = data.current_agent || agentTrace.active_agent || 'ZARA';
+    const providers = data.providers || [];
+    const booking = data.booking_data;
+    const agents = ['ZARA','KHOJI','MUKHTAR','YAKEEN','HIFAZAT'];
+    const agentDesc = { ZARA: 'Intent parser & NLP', KHOJI: 'Provider discovery', MUKHTAR: 'Booking coordinator', YAKEEN: 'Follow-up scheduler', HIFAZAT: 'Quality guardian' };
+    const activeIdx = agents.indexOf(activeAgent);
+    const agentRows = agents.map((a, i) => {
+        const isDone = i < activeIdx;
+        const isActive = i === activeIdx;
+        const obs = tr.agent_observations?.[a] || agentTrace[`${a.toLowerCase()}_trace`] || '';
+        const shortObs = obs ? obs.substring(0,90)+(obs.length>90?'…':'') : agentDesc[a];
+        return `
+        <div class="agent-trace-row ${isActive?'active':''}">
+            <div class="agent-dot ${isDone?'done':isActive?'':'idle'}">${isDone?'✓':a.slice(0,2)}</div>
+            <div class="agent-trace-text"><strong>${a}</strong> — ${agentDesc[a]}<br><span>${shortObs}</span></div>
+        </div>`;
+    }).join('');
+    const nProviders = providers.length;
+    const bookingId = booking?.booking_id || tr.final_outcome?.booking_id || '—';
+    const lang = tr.final_outcome?.language_handled || '—';
+    const status = tr.final_outcome?.status || tr.task_plan?.status || '—';
+    const allDecisions = [...(tr.decisions?.KHOJI||[]),...(tr.decisions?.MUKHTAR||[]),...(tr.decisions?.YAKEEN||[])];
+    const decisionPills = allDecisions.slice(0,6).map(d=>`<span class="decision-pill">${d}</span>`).join('');
+    const toolCalls = (tr.tool_calls||[]).slice(0,4).map(tc=>`<div class="timeline-item done"><span>${typeof tc==='string'?tc:tc.name||JSON.stringify(tc)}</span></div>`).join('');
+    const zaraReasoning = tr.reasoning?.zara_reasoning || agentTrace.zara_trace || '';
+    panel.innerHTML = `
+    <div class="trace-section"><div class="trace-label">Pipeline Status</div>${agentRows}</div>
+    <div class="trace-section">
+        <div class="trace-label">Metrics</div>
+        <div class="metric-row">
+            <div class="metric-box"><div class="metric-val">${nProviders}</div><div class="metric-lbl">Providers</div></div>
+            <div class="metric-box"><div class="metric-val">${data.latency_ms?Math.round(data.latency_ms/100)/10+'s':'—'}</div><div class="metric-lbl">Latency</div></div>
+            <div class="metric-box"><div class="metric-val" style="font-size:0.7rem">${lang}</div><div class="metric-lbl">Language</div></div>
+        </div>
+        <div class="metric-row" style="margin-top:6px">
+            <div class="metric-box" style="flex:2"><div class="metric-val" style="font-size:0.75rem;word-break:break-all">${bookingId}</div><div class="metric-lbl">Booking ID</div></div>
+            <div class="metric-box"><div class="metric-val" style="font-size:0.75rem;color:${status==='SUCCESS'?'var(--neon)':status==='PARTIAL'?'var(--yellow)':'var(--blue)'}">${status}</div><div class="metric-lbl">Status</div></div>
+        </div>
+    </div>
+    ${zaraReasoning?`<div class="trace-section"><div class="trace-label">ZARA Reasoning</div><div style="font-size:0.75rem;color:var(--text-dim);background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px;line-height:1.5">${zaraReasoning.substring(0,250)}${zaraReasoning.length>250?'…':''}</div></div>`:''}
+    ${allDecisions.length?`<div class="trace-section"><div class="trace-label">Agent Decisions</div><div>${decisionPills}</div></div>`:''}
+    ${toolCalls?`<div class="trace-section"><div class="trace-label">Tool Calls</div><div>${toolCalls}</div></div>`:''}
+    <div class="trace-section"><div class="trace-label">Raw JSON</div><div class="trace-json">${syntaxHighlight(tr)}</div></div>`;
+}
+
+function syntaxHighlight(obj) {
+    let json = JSON.stringify(obj, null, 2);
+    json = json.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, m => {
+        if (/^"/.test(m)) return /:$/.test(m)?`<span class="jk">${m}</span>`:`<span class="jv">${m}</span>`;
+        if (/true|false/.test(m)) return `<span class="jb">${m}</span>`;
+        if (/null/.test(m)) return `<span class="jn">${m}</span>`;
+        return `<span style="color:#ff8a65">${m}</span>`;
+    });
+}
+
+// ═══════════════════════════════════════════════
+//  MOCK AUTO-BID (mirrors Android _triggerMockAutoBid)
+// ═══════════════════════════════════════════════
+function triggerMockAutoBid(providers, jobId) {
+    // All DB providers have is_mock=true (set by khoji_agent [BUG-05])
+    const mocks = (providers || []).filter(p => p.is_mock === true);
+    // Fallback: if backend didn't set flag yet, treat all as mock (demo mode)
+    const toFire = mocks.length ? mocks.slice(0, 2) : (providers || []).slice(0, 2);
+    if (!toFire.length) return;
+    toFire.forEach((p, i) => _fireMockBid(p, i, jobId));
+}
+
+function _fireMockBid(provider, index, jobId) {
+    const pid = provider.provider_id || ('mock_' + Math.random().toString(36).substr(2,8));
+    const name = provider.business_name || provider.name || 'Ahmed Technician';
+    const basePrice = provider.pricing?.estimated_total_pkr || provider.pricing?.hourly_rate_pkr || 1500;
+    // Second provider bids ~8% lower to simulate competition (mirrors Android)
+    const price = index === 0 ? basePrice : Math.round(basePrice * 0.92);
+    const eta = provider.eta_minutes || (20 + index * 5);
+    const delaySec = 3 + (index * 6); // 3s first, 9s second
+
+    // Capture values in closure — NEVER read globals inside setTimeout (race condition)
+    const capturedJobId = jobId || pid;
+    const capturedPid   = pid;
+    const capturedProvider = provider;
+
+    setTimeout(() => {
+        const html = renderBidCard(name, price, eta, capturedJobId, capturedPid, true, capturedProvider);
+        if (html) {
+            addMessage(html, false, 'MUKHTAR');
+            scrollChat();
+        }
+    }, delaySec * 1000);
+}
+
+// ═══════════════════════════════════════════════
+//  SEND MESSAGE
+// ═══════════════════════════════════════════════
+async function sendMessage() {
+    const input = document.getElementById('user-input');
+    const btn = document.getElementById('send-btn');
+    const msg = input.value.trim();
+    if (!msg) return;
+    input.value = '';
+    addMessage(msg, true);
+    btn.disabled = true;
+    btn.innerHTML = '<div class="spin"></div>';
+    await doOrchestration(msg);
+    btn.disabled = false;
+    btn.innerHTML = 'Send';
+}
+
+document.getElementById('user-input').addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+});
+
+function sendChip(el) {
+    document.getElementById('user-input').value = el.textContent;
+    sendMessage();
+}
+
+// ═══════════════════════════════════════════════
+//  CORE ORCHESTRATION
+// ═══════════════════════════════════════════════
+async function doOrchestration(message) {
+    showTyping();
+    document.getElementById('agent-badge').textContent = '...';
+
+    try {
+        const res = await fetch(`${API}/v1/workflows/khidmatgar-master/run`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                inputs: {
+                    user_message: message,
+                    platform: 'web',
+                    client_lat: clientLat,
+                    client_lng: clientLng,
+                },
+                session_id: sessionId,
+            })
         });
 
-        // Global function for injected buttons
-        window.submitBooking = function(providerId) {
-            userInput.value = "book " + providerId;
-            chatForm.dispatchEvent(new Event('submit'));
-        };
-    </script>
+        hideTyping();
+
+        if (!res.ok) {
+            const err = await res.text();
+            addMessage(`⚠️ Backend error (${res.status}): ${err}`, false, 'SYSTEM');
+            return;
+        }
+
+        const data = await res.json();
+        sessionId = data.session_id || sessionId;
+        currentProviders = data.providers || [];
+
+        document.getElementById('agent-badge').textContent = data.current_agent || 'ZARA';
+        updateTrace(data);
+
+        const msgType = data.message_type;
+        const botText = (data.user_message || '').replace(/\n/g, '<br>');
+
+        // Providers found: show list + trigger bids.
+        // Guard: treat TEXT with providers same as PROVIDER_LIST (backend bug fallback).
+        const hasProviders = currentProviders.length > 0;
+        const isProviderList = msgType === 'PROVIDER_LIST' || (hasProviders && msgType !== 'BOOKING_CONFIRMED');
+
+        if (isProviderList && hasProviders) {
+            // Fresh request — clear previous bid state
+            deliveredBidIds = new Set();
+            pendingMockBids = {};
+
+            addMessage(botText + renderProviderCards(currentProviders), false, data.current_agent);
+            addProviderMarkers(currentProviders);
+            updateMapOverlay(currentProviders);
+
+            // Set job ID from the PENDING booking mukhtar created
+            if (data.booking_data?.booking_id) {
+                currentJobId = data.booking_data.booking_id;
+            }
+
+            // Start backend bid polling (real providers)
+            startPolling();
+
+            // Trigger mock auto-bid — capture jobId NOW before timeout fires
+            const jobIdForBid = currentJobId;
+            triggerMockAutoBid(currentProviders, jobIdForBid);
+
+        } else if (msgType === 'BOOKING_CONFIRMED' || data.booking_data?.status === 'CONFIRMED') {
+            stopPolling();
+            const b = data.booking_data || {};
+            activeBooking = b;
+            currentJobId = b.booking_id;
+            showBookingReceipt(b);
+
+            // YAKEEN followup
+            setTimeout(() => {
+                const eta = b.eta_minutes || 25;
+                const pname = b.provider_name || b.confirmed_provider_id || 'Provider';
+                addMessage(`📲 Main <strong>${pname}</strong> ko track kar raha hun. ~${eta} minute mein pahunchenge. Kaam mukne ke baad Complete mark karna! ⭐`, false, 'YAKEEN');
+                scrollChat();
+            }, 1500);
+            startStatusPolling(b.booking_id);
+
+        } else {
+            addMessage(botText, false, data.current_agent);
+        }
+
+    } catch(e) {
+        hideTyping();
+        addMessage(`⚠️ Cannot reach backend.<br><small>Make sure the FastAPI server is running on port 8000.<br>Run: <code>uvicorn main:app --reload</code></small>`, false, 'SYSTEM');
+        document.getElementById('agent-badge').textContent = 'ERR';
+    }
+}
+
+// ═══════════════════════════════════════════════
+//  POLLING — Bid Updates from Backend
+// ═══════════════════════════════════════════════
+function startPolling() {
+    stopPolling();
+    if (!sessionId) return;
+    // Poll real updates every 4 seconds
+    pollingInterval = setInterval(pollUpdates, 4000);
+}
+
+function stopPolling() {
+    clearTimeout(pollingInterval);
+    clearInterval(pollingInterval);
+    pollingInterval = null;
+}
+
+async function pollUpdates() {
+    if (!sessionId) return;
+    try {
+        const r = await fetch(`${API}/client/sessions/${sessionId}/updates`);
+        if (!r.ok) return;
+        const data = await r.json();
+        const updates = data.updates || [];
+        updates.forEach(u => {
+            if (u.type === 'BID' && u.message) {
+                // Format: SYSTEM_INCOMING_BID:name:price:eta:jobId:providerId
+                const parts = u.message.split(':');
+                if (parts.length >= 5 && parts[0] === 'SYSTEM_INCOMING_BID') {
+                    const provName = parts[1];
+                    const price = parts[2];
+                    const eta = parts[3];
+                    const jobId = parts[4];
+                    const pId = parts[5] || jobId;
+                    const html = renderBidCard(provName, price, eta, jobId, pId, false, null);
+                    if (html) {
+                        addMessage(html, false, 'MUKHTAR');
+                        scrollChat();
+                    }
+                }
+            } else if (u.type === 'ARRIVED') {
+                addMessage('<div class="status-banner arrived">🚗 Your provider has arrived at the location!</div>', false, 'YAKEEN');
+                scrollChat();
+                // Update tracking status if panel exists
+                if (activeBooking?.booking_id) {
+                    const statusEl = document.getElementById('tstatus-' + activeBooking.booking_id);
+                    if (statusEl) statusEl.textContent = 'ARRIVED';
+                }
+            } else if (u.type === 'COMPLETED') {
+                stopPolling();
+                addMessage('<div class="status-banner completed">🎉 Job completed! Please rate the service.</div>', false, 'YAKEEN');
+                scrollChat();
+                if (activeBooking) {
+                    setTimeout(() => showRatingCard(activeBooking.booking_id, activeBooking.provider_id, activeBooking.provider_name), 800);
+                }
+            }
+        });
+    } catch(e) {}
+}
+
+// ═══════════════════════════════════════════════
+//  STATUS POLLING — After Booking Confirmed
+// ═══════════════════════════════════════════════
+function startStatusPolling(bookingId) {
+    if (statusPollInterval) clearInterval(statusPollInterval);
+    let count = 0;
+    statusPollInterval = setInterval(async () => {
+        count++;
+        await pollUpdates();
+        // Also poll booking status for simulated progression
+        try {
+            const r = await fetch(`${API}/bookings/${bookingId}/status`);
+            if (r.ok) {
+                const d = await r.json();
+                const statusEl = document.getElementById('tstatus-' + bookingId);
+                if (statusEl && d.status) statusEl.textContent = d.status.replace('_', ' ');
+            }
+        } catch(e) {}
+        if (count > 30) clearInterval(statusPollInterval); // 2.5min max
+    }, 5000);
+}
+
+// ═══════════════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════════════
+(async () => {
+    initLocation();
+    await checkBackend();
+    setInterval(checkBackend, 30000);
+})();
+</script>
 </body>
 </html>

@@ -17,7 +17,9 @@ def get_zara_intent(user_message: str, chat_history: list = None, client_lat: fl
     api_key = os.getenv("GEMINI_API_KEY", "")
     
     # --- Observation Phase ---
-    observation = f"User said: '{user_message}' | Length: {len(user_message)} chars | Contains Urdu chars: {bool(re.search(r'[\u0600-\u06FF]', user_message))}"
+    _urdu_pattern = re.compile(r'[\u0600-\u06FF]')
+    has_urdu = bool(_urdu_pattern.search(user_message))
+    observation = f"User said: '{user_message}' | Length: {len(user_message)} chars | Contains Urdu chars: {has_urdu}"
     
     # Fallback if no key
     if not api_key or api_key in ["", "dummy_key", "your_api_key"]:

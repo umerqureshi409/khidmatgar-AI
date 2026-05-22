@@ -404,11 +404,13 @@ def _build_response(
 
     all_tool_calls = khoji.get("tool_calls", [])
 
-    # [BUG-02] Determine message_type correctly
+    # Determine message_type correctly
+    # CONFIRMED → receipt flow; PENDING/no-status with providers → show provider list + trigger bids
     if booking and booking.get("status") == "CONFIRMED":
         message_type = "BOOKING_CONFIRMED"
-    elif providers and not booking:
-        message_type = "PROVIDER_LIST"   # Flutter needs this to show provider panel
+    elif providers:
+        # Providers found — show list regardless of whether a PENDING job was created
+        message_type = "PROVIDER_LIST"
     else:
         message_type = "TEXT"
 
